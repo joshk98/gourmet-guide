@@ -12,13 +12,13 @@ const Navbar = () => {
           </NavLink>
         </li>
         <li>
-          <NavLink exact to="/Cookbook" activeClassName="active-link">
+          <NavLink exact to="/cookbook" activeClassName="active-link">
             CookBook
           </NavLink>
         </li>
         <li>
-          <NavLink exact to="/Create-a-recipe" activeClassName="active-link">
-            Create A Recipe
+          <NavLink exact to="/add-recipe" activeClassName="active-link">
+            Add A Recipe
           </NavLink>
         </li>
         <li>
