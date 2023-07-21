@@ -13,6 +13,7 @@ const App = () => {
         <Navbar />
         <Routes>
           <Route path="/add-recipe" element={<AddRecipe />} />
+          <Route path="/CookBook" element={<CookBook />} />
         </Routes>
       </div>
     </Router>
