@@ -37,6 +37,9 @@ exports[`App renders correctly 1`] = `
         </li>
       </ul>
     </nav>
+    <div>
+      Home
+    </div>
   </div>
 </DocumentFragment>
 `;
