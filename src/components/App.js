@@ -12,6 +12,7 @@ const App = () => {
       <div className="app">
         <NavBar />
         <Routes>
+          <Route path="/cookbook" element={<CookBook />} />
           <Route path="/create-a-recipe" element={<AddRecipe />} />
         </Routes>
       </div>
