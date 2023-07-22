@@ -48,13 +48,13 @@ const AddRecipe = () => {
         setAlert({
           message: "Recipe Added",
           isSuccess: true,
-        })
+        }),
       )
       .catch(() =>
         setAlert({
           message: "Server error. Please try again later.",
           isSuccess: false,
-        })
+        }),
       );
   };
 
@@ -64,7 +64,7 @@ const AddRecipe = () => {
     if (name === "dietaryRequirements") {
       const selectedOptions = Array.from(
         event.target.selectedOptions,
-        (option) => option.value
+        (option) => option.value,
       );
       setFields({ ...fields, [name]: selectedOptions });
     } else {

@@ -1,10 +1,10 @@
 import React from "react";
 import { render } from "@testing-library/react";
-import AddRecipe from "../components/AddRecipe";
+import RecipeCard from "../components/RecipeCard";
 
-describe("AddRecipe", () => {
+describe("RecipeCard", () => {
   it("renders correctly", () => {
-    const { asFragment } = render(<AddRecipe />);
+    const { asFragment } = render(<RecipeCard />);
 
     expect(asFragment()).toMatchSnapshot();
   });
