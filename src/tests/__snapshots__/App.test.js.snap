@@ -9,7 +9,7 @@ exports[`App renders correctly 1`] = `
       <ul>
         <li>
           <a
-            href="/home"
+            href="/"
           >
             Home
           </a>
@@ -30,7 +30,7 @@ exports[`App renders correctly 1`] = `
         </li>
         <li>
           <a
-            href="/Login"
+            href="/login"
           >
             Login
           </a>

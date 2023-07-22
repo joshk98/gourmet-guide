@@ -7,7 +7,7 @@ const Navbar = () => {
     <nav>
       <ul>
         <li>
-          <a href="/home">Home</a>
+          <a href="/">Home</a>
         </li>
         <li>
           <a href="/cookbook">CookBook</a>
@@ -16,7 +16,7 @@ const Navbar = () => {
           <a href="/create-a-recipe">Create A Recipe</a>
         </li>
         <li>
-          <a href="/Login">Login</a>
+          <a href="/login">Login</a>
         </li>
       </ul>
     </nav>
