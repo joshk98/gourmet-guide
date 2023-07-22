@@ -1,7 +1,8 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import AddRecipe from "./AddRecipe";
-import Navbar from "./NavBar";
+import Navbar from "./Navbar";
+import CookBook from "./CookBook";
 
 import "../styles/app.css";
 
