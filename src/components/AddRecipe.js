@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { v4 as uuidv4 } from "uuid";
 import "../styles/addrecipe.css";
+import Alert from "./Alert";
 
 const AddRecipe = () => {
   const initialState = {
@@ -46,7 +47,7 @@ const AddRecipe = () => {
     setAlert({ message: "", isSuccess: false });
 
     axios
-      .post("http://localhost:3000/api/v1/Recipe", fields)
+      .post("http://localhost:3000/api/v1/Recipe", fields) // need to update api//
       .then(() =>
         setAlert({
           message: "Recipe Added",
@@ -238,6 +239,7 @@ const AddRecipe = () => {
           <button type="submit">Add</button>
         </div>
       </form>
+      <Alert message={alert.message} success={alert.isSuccess} />
     </div>
   );
 };
