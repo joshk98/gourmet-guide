@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { v4 as uuidv4 } from "uuid";
 import "../styles/addrecipe.css";
 
 const AddRecipe = () => {
@@ -7,8 +8,8 @@ const AddRecipe = () => {
     fields: {
       title: "",
       cuisine: "",
-      dietaryRequirements: [],
-      ingredients: [{ name: "", measurement: "" }],
+      dietaryRequirements: "",
+      ingredients: [{ id: uuidv4(), name: "", measurement: "" }],
       instructions: "",
       prepTime: "",
       cookingTime: "",
@@ -40,6 +41,8 @@ const AddRecipe = () => {
       return;
     }
 
+    console.log("Submitting data:", fields);
+
     setAlert({ message: "", isSuccess: false });
 
     axios
@@ -60,22 +63,13 @@ const AddRecipe = () => {
 
   const handleFieldChange = (event) => {
     const { name, value } = event.target;
-
-    if (name === "dietaryRequirements") {
-      const selectedOptions = Array.from(
-        event.target.selectedOptions,
-        (option) => option.value
-      );
-      setFields({ ...fields, [name]: selectedOptions });
-    } else {
-      setFields({ ...fields, [name]: value });
-    }
+    setFields({ ...fields, [name]: value });
   };
 
   const handleAddIngredient = () => {
     setFields({
       ...fields,
-      ingredients: [...fields.ingredients, { name: "", measurement: "" }],
+      ingredients: [...fields.ingredients, { name: "" }],
     });
   };
 
@@ -144,6 +138,7 @@ const AddRecipe = () => {
               <option value="" disabled>
                 --Select a dietary requirement--
               </option>
+              <option value="None">None</option>
               <option value="Vegetarian">Vegetarian</option>
               <option value="Vegan">Vegan</option>
               <option value="Gluten-Free">Gluten-Free</option>
@@ -156,10 +151,7 @@ const AddRecipe = () => {
           <label htmlFor="ingredients">
             Ingredients:
             {fields.ingredients.map((ingredient, index) => (
-              <div
-                key={`${ingredient.name}-${ingredient.measurement}`}
-                className="ingredient-field"
-              >
+              <div key={ingredient.id} className="ingredient-field">
                 <input
                   type="text"
                   placeholder="Ingredient Name"
