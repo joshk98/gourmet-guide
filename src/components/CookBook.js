@@ -9,8 +9,20 @@ const Cookbook = () => {
         <ul className="vertical-list">
           <li>Recipe 1</li>
           <li>Recipe 3</li>
-          <li>recipe 3</li>
+          <li>Recipe 3</li>
         </ul>
+      </div>
+    </div>
+  );
+};
+
+const Ingredients = () => {
+  return (
+    <div className="ingredients-list">
+      <div className="list">
+        <li>Ingredient 2</li>
+        <li>Ingredient 2</li>
+        <li>Ingredient 2</li>
       </div>
     </div>
   );
