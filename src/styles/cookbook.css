@@ -4,19 +4,22 @@ body {
   }
 
   .cookbook {
-    display: flex;
-    justify-content: center;
+    display: block;
+    /* justify-content: center; */
+    margin: 50px;
+    padding: 25px;
   }
 
   .list{
    display:block;
-   /* margin: 10px, 20px, 10px, 20px; */
+   width: 40%;
+   height: 1000%;
    color: #ffffff;
    background-color: #ff6666;
    font-size: 20px;
    border: 1px solid #ff6666;
    border-radius: 8px;
-   padding: 16px;
+   padding: 50px;
   }
 
   ul.vertical-list {
