@@ -6,23 +6,18 @@ const Cookbook = () => {
     <div className="cookbook">
       <div className="list">
         <h2>My Recipes</h2>
-        <ul className="vertical-list">
-          <li>Recipe 1</li>
-          <li>Recipe 3</li>
-          <li>Recipe 3</li>
-        </ul>
+        <ul className="vertical-list" />
       </div>
+      <Ingredients />
     </div>
   );
 };
 
 const Ingredients = () => {
   return (
-    <div className="ingredients-list">
-      <div className="list">
-        <li>Ingredient 2</li>
-        <li>Ingredient 2</li>
-        <li>Ingredient 2</li>
+    <div className="ingredients">
+      <div className="ingredients-list">
+        <h2>Ingredients</h2>
       </div>
     </div>
   );
