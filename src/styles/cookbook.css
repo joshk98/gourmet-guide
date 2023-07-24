@@ -4,22 +4,25 @@ body {
   }
 
   .cookbook {
-    display: block;
-    /* justify-content: center; */
+    display: flex;
+    justify-content: flex-end;
     margin: 50px;
     padding: 25px;
+    border: solid red 5px;
   }
 
   .list{
+   border: solid green 5px;
    display:block;
-   width: 40%;
+   width: 15%;
    height: 1000%;
    color: #ffffff;
    background-color: #ff6666;
    font-size: 20px;
-   border: 1px solid #ff6666;
+   /* border: 1px solid #ff6666; */
    border-radius: 8px;
    padding: 50px;
+   
   }
 
   ul.vertical-list {
@@ -29,4 +32,15 @@ body {
   ul.vertical-list li {
     display: block;
   }
-  
+
+
+  .ingredients-list{
+    border: solid blue 5px;
+    justify-content: flex-end;
+    display: flex;
+    /* width: ; */
+  }
+
+  .list-2{
+    border: solid yellow 5px;
+  }
