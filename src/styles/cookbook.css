@@ -1,0 +1,29 @@
+body {
+    font-family: "Montserrat", sans-serif;
+    margin: 0;
+  }
+
+  .cookbook {
+    display: flex;
+    justify-content: center;
+  }
+
+  .list{
+   display:block;
+   /* margin: 10px, 20px, 10px, 20px; */
+   color: #ffffff;
+   background-color: #ff6666;
+   font-size: 20px;
+   border: 1px solid #ff6666;
+   border-radius: 8px;
+   padding: 16px;
+  }
+
+  ul.vertical-list {
+    list-style-type: none;
+  }
+
+  ul.vertical-list li {
+    display: block;
+  }
+  

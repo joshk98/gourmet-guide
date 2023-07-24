@@ -52,13 +52,13 @@ const AddRecipe = () => {
         setAlert({
           message: "Recipe Added",
           isSuccess: true,
-        })
+        }),
       )
       .catch(() =>
         setAlert({
           message: "Server error. Please try again later.",
           isSuccess: false,
-        })
+        }),
       );
   };
 
