@@ -2,10 +2,33 @@
 
 exports[`CookBook renders correctly 1`] = `
 <DocumentFragment>
-  <ul>
-    <li>
-      recipe 1 recipe 2 recipe 3
-    </li>
-  </ul>
+  <div
+    class="cookbook"
+  >
+    <div
+      class="list"
+    >
+      <h2>
+        My Recipes
+      </h2>
+      <ul
+        class="vertical-list"
+      />
+    </div>
+    <div
+      class="ingredients"
+    >
+      <div
+        class="ingredients-list"
+      >
+        <h2>
+          Ingredients
+        </h2>
+        <ul
+          class="vertical-list"
+        />
+      </div>
+    </div>
+  </div>
 </DocumentFragment>
 `;
