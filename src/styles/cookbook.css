@@ -8,14 +8,15 @@ body {
     justify-content: space-between ;
     margin: 50px;
     padding: 50px;
-    border: solid red 5px;
-    width: auto;
+    width: 80%;
+    border-radius: 8px;
   }
 
   .list{
    display:block;
-   width: 15%;
-   height: 1000%;
+   width: auto;
+   height: auto;
+   min-height: 60px;
    color: #ffffff;
    background-color: #ff6666;
    font-size: 20px;
@@ -25,31 +26,33 @@ body {
    
   }
 
-  ul.vertical-list {
-    list-style-type: none;
+  .vertical-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
   }
 
-  ul.vertical-list li {
+  .vertical-list li {
     display: block;
+    padding: 5px 10px;
   }
 
 
   .ingredients{
     display: flex;
-    justify-content: flex-end ;
-    margin: 50px;
-    padding: 25px;
-    /* border: solid blue 5px; */
+    justify-content: space-between;
+    width: auto;
   }
 
   .ingredients-list{
-   /* display:block; */
-   width: auto;
-   height: auto;
-   color: #ffffff;
-   background-color: #ff6666;
-   font-size: 20px;
-   border: 1px solid #ff6666;
-   border-radius: 8px;
-   padding: 50px;
+    display:block;
+    width: auto;
+    height: auto;
+    min-height: 60px;
+    color: #ffffff;
+    background-color: #ff6666;
+    font-size: 20px;
+    border: 1px solid #ff6666;
+    border-radius: 8px;
+    padding: 50px;
   }
