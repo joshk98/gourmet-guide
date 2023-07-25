@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RecipeCard renders correctly 1`] = `
+<DocumentFragment>
+  <div
+    class="recipe-card"
+    data-testid="recipe-card"
+  >
+    <div
+      class="recipe-card__title"
+    />
+    <div
+      class="recipe-card__cuisine"
+    />
+    <div
+      class="recipe-card__prepTime"
+    />
+    <div
+      class="recipe-card__cookingTime"
+    />
+    <div
+      class="recipe-card__servings"
+    />
+    <button
+      class="property-card__learnMore"
+      type="button"
+    >
+      Learn More
+    </button>
+    <button
+      class="property-card__addCookbook"
+      type="button"
+    >
+      Add to Cookbook
+    </button>
+  </div>
+</DocumentFragment>
+`;

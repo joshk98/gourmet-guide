@@ -18,6 +18,7 @@ const Ingredients = () => {
     <div className="ingredients">
       <div className="ingredients-list">
         <h2>Ingredients</h2>
+        <ul className="vertical-list" />
       </div>
     </div>
   );
