@@ -34,7 +34,7 @@ const Home = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:4000/api/v1/Recipe${search}`)
+      .get(`http://localhost:3000/api/v1/Recipe${search}`)
       .then(({ data }) => setRecipes(data))
       .catch((error) => console.error(error));
   }, [search]);
