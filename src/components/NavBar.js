@@ -2,7 +2,7 @@ import React from "react";
 
 import "../styles/navbar.css";
 
-const Navbar = () => {
+const Navbar = ({ isLoggedIn }) => {
   return (
     <nav>
       <ul>
@@ -16,7 +16,7 @@ const Navbar = () => {
           <a href="/create-a-recipe">Create A Recipe</a>
         </li>
         <li>
-          <a href="/login">Login</a>
+          {isLoggedIn ? <a href="/">Logout</a> : <a href="/login">Login</a>}
         </li>
       </ul>
     </nav>
