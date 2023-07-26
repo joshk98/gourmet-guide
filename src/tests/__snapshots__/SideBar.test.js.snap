@@ -1,0 +1,95 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SideBar renders correctly 1`] = `
+<DocumentFragment>
+  <div
+    class="sidebar__container"
+  >
+    <form
+      class="search-form"
+    >
+      <input
+        class="search-input"
+        placeholder="Search by title"
+        type="text"
+        value=""
+      />
+      <button
+        class="search-button"
+        type="submit"
+      >
+        Search
+      </button>
+    </form>
+    <div
+      class="sidebar__links"
+    >
+      <a
+        href="/"
+      >
+        Show All
+      </a>
+      <a
+        href="/?query={\\"cuisine\\":\\"Italian\\"}"
+      >
+        Italian Recipes
+      </a>
+      <a
+        href="/?query={\\"cuisine\\":\\"Chinese\\"}"
+      >
+        Chinese Recipes
+      </a>
+      <a
+        href="/?query={\\"cuisine\\":\\"Japanese\\"}"
+      >
+        Japanese Recipes
+      </a>
+      <a
+        href="/?query={\\"cuisine\\":\\"Indian\\"}"
+      >
+        Indian Recipes
+      </a>
+      <a
+        href="/?query={\\"cuisine\\":\\"Mexican\\"}"
+      >
+        Mexican Recipes
+      </a>
+      <a
+        href="/?query={\\"cuisine\\":\\"French\\"}"
+      >
+        French Recipes
+      </a>
+      <a
+        href="/?query={\\"cuisine\\":\\"Thai\\"}"
+      >
+        Thai Recipes
+      </a>
+      <a
+        href="/?query={\\"cuisine\\":\\"Spanish\\"}"
+      >
+        Spanish Recipes
+      </a>
+      <a
+        href="/?query={\\"cuisine\\":\\"Middle Eastern\\"}"
+      >
+        Middle Eastern Recipes
+      </a>
+      <a
+        href="/?query={\\"cuisine\\":\\"Korean\\"}"
+      >
+        Korean Recipes
+      </a>
+      <a
+        href="/?sort={\\"totalTime\\":1}"
+      >
+        Total Time Ascending
+      </a>
+      <a
+        href="/?sort={\\"totalTime\\":-1}"
+      >
+        Total Time Descending
+      </a>
+    </div>
+  </div>
+</DocumentFragment>
+`;
