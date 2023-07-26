@@ -29,7 +29,7 @@ const Sidebar = ({ search }) => {
   };
 
   return (
-    <div className="sidebar__links">
+    <div className="sidebar__container">
       <form className="search-form" onSubmit={handleSearch}>
         <input
           className="search-input"
@@ -42,45 +42,47 @@ const Sidebar = ({ search }) => {
           Search
         </button>
       </form>
-      <Link to="/">Show All</Link>
-      <Link to={buildQueryString(search, "query", { cuisine: "Italian" })}>
-        Italian Recipes
-      </Link>
-      <Link to={buildQueryString(search, "query", { cuisine: "Chinese" })}>
-        Chinese Recipes
-      </Link>
-      <Link to={buildQueryString(search, "query", { cuisine: "Japanese" })}>
-        Japanese Recipes
-      </Link>
-      <Link to={buildQueryString(search, "query", { cuisine: "Indian" })}>
-        Indian Recipes
-      </Link>
-      <Link to={buildQueryString(search, "query", { cuisine: "Mexican" })}>
-        Mexican Recipes
-      </Link>
-      <Link to={buildQueryString(search, "query", { cuisine: "French" })}>
-        French Recipes
-      </Link>
-      <Link to={buildQueryString(search, "query", { cuisine: "Thai" })}>
-        Thai Recipes
-      </Link>
-      <Link to={buildQueryString(search, "query", { cuisine: "Spanish" })}>
-        Spanish Recipes
-      </Link>
-      <Link
-        to={buildQueryString(search, "query", { cuisine: "Middle Eastern" })}
-      >
-        Middle Eastern Recipes
-      </Link>
-      <Link to={buildQueryString(search, "query", { cuisine: "Korean" })}>
-        Korean Recipes
-      </Link>
-      <Link to={buildQueryString(search, "sort", { totalTime: 1 })}>
-        Total Time Ascending
-      </Link>
-      <Link to={buildQueryString(search, "sort", { totalTime: -1 })}>
-        Total Time Descending
-      </Link>
+      <div className="sidebar__links">
+        <Link to="/">Show All</Link>
+        <Link to={buildQueryString(search, "query", { cuisine: "Italian" })}>
+          Italian Recipes
+        </Link>
+        <Link to={buildQueryString(search, "query", { cuisine: "Chinese" })}>
+          Chinese Recipes
+        </Link>
+        <Link to={buildQueryString(search, "query", { cuisine: "Japanese" })}>
+          Japanese Recipes
+        </Link>
+        <Link to={buildQueryString(search, "query", { cuisine: "Indian" })}>
+          Indian Recipes
+        </Link>
+        <Link to={buildQueryString(search, "query", { cuisine: "Mexican" })}>
+          Mexican Recipes
+        </Link>
+        <Link to={buildQueryString(search, "query", { cuisine: "French" })}>
+          French Recipes
+        </Link>
+        <Link to={buildQueryString(search, "query", { cuisine: "Thai" })}>
+          Thai Recipes
+        </Link>
+        <Link to={buildQueryString(search, "query", { cuisine: "Spanish" })}>
+          Spanish Recipes
+        </Link>
+        <Link
+          to={buildQueryString(search, "query", { cuisine: "Middle Eastern" })}
+        >
+          Middle Eastern Recipes
+        </Link>
+        <Link to={buildQueryString(search, "query", { cuisine: "Korean" })}>
+          Korean Recipes
+        </Link>
+        <Link to={buildQueryString(search, "sort", { totalTime: 1 })}>
+          Total Time Ascending
+        </Link>
+        <Link to={buildQueryString(search, "sort", { totalTime: -1 })}>
+          Total Time Descending
+        </Link>
+      </div>
     </div>
   );
 };

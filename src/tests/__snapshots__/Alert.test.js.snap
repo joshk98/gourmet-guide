@@ -3,13 +3,9 @@
 exports[`Alert displays an error message 1`] = `
 <DocumentFragment>
   <div
-    class="alert-error"
+    class="alert alert-error"
   >
-    <div
-      class="alert-message"
-    >
-      Error!
-    </div>
+    Error!
   </div>
 </DocumentFragment>
 `;
@@ -17,13 +13,9 @@ exports[`Alert displays an error message 1`] = `
 exports[`Alert displays an success message 1`] = `
 <DocumentFragment>
   <div
-    class="alert-success"
+    class="alert alert-success"
   >
-    <div
-      class="alert-message"
-    >
-      Success!
-    </div>
+    Success!
   </div>
 </DocumentFragment>
 `;

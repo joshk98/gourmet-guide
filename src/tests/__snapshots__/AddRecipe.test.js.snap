@@ -104,6 +104,11 @@ exports[`AddRecipe renders correctly 1`] = `
               --Select a dietary requirement--
             </option>
             <option
+              value="None"
+            >
+              None
+            </option>
+            <option
               value="Vegetarian"
             >
               Vegetarian

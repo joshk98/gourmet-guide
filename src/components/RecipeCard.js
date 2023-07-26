@@ -15,7 +15,7 @@ const RecipeCard = ({ title, cuisine, prepTime, cookingTime, servings }) => {
         Learn More
       </button>
       <button className="property-card__addCookbook" type="button">
-        Add to Cookbook
+        Add to CookBook
       </button>
     </div>
   );
