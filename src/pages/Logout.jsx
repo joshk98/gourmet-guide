@@ -1,21 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { logout } from "../config/Firebase";
+import { logout } from "../config/Auth";
 
 const Logout = ({ setIsLoggedIn }) => {
   const navigate = useNavigate();
 
-  const handleLogout = async () => {
-    const success = await logout();
-    if (success) {
+  useEffect(() => {
+    async function handleLogout() {
+      await logout();
       setIsLoggedIn(false);
       navigate("/");
     }
-  };
 
-  React.useEffect(() => {
     handleLogout();
-  }, []);
+  }, [setIsLoggedIn, navigate]);
+
   return null;
 };
 

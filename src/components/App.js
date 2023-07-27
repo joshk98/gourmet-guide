@@ -20,7 +20,9 @@ const App = () => {
           <Route path="/create-a-recipe" element={<AddRecipe />} />
           <Route
             path="/login"
-            element={<Login setIsLoggedIn={setIsLoggedIn} />}
+            element={
+              <Login setIsLoggedIn={setIsLoggedIn} isLoggedIn={isLoggedIn} />
+            }
           />
           <Route path="/sign-up" element={<CreateAccount />} />
         </Routes>
