@@ -9,6 +9,7 @@ const Cookbook = () => {
         <ul className="vertical-list" />
       </div>
       <Ingredients />
+      <Instructions />
     </div>
   );
 };
@@ -20,6 +21,16 @@ const Ingredients = () => {
         <h2>Ingredients</h2>
         <ul className="vertical-list" />
       </div>
+    </div>
+  );
+};
+
+const Instructions = () => {
+  return (
+    <div className="instructions">
+      <h2>Instructions</h2>
+      <div className="instruction-steps" />
+      <ul className="vertical-list" />
     </div>
   );
 };
