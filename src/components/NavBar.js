@@ -12,9 +12,7 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
 
   return (
     <nav className="navbar">
-      <div className="navbar-links-item" id="navbar-links-item__name">
-        Gourmet Guide
-      </div>
+      <div className="navbar-links-name">Gourmet Guide</div>
       <ul className="navbar-links">
         <li className="navbar-links-item">
           <NavLink to="/">Home</NavLink>
@@ -23,7 +21,7 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
           <NavLink to="/cookbook">CookBook</NavLink>
         </li>
         <li className="navbar-links-item">
-          <NavLink to="/create-a-recipe">Create A Recipe</NavLink>
+          <NavLink to="/create-a-recipe">Create a Recipe</NavLink>
         </li>
         <li className="navbar-links-item">
           {isLoggedIn ? (
