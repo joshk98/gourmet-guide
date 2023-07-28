@@ -76,6 +76,54 @@ const Sidebar = ({ search }) => {
         <Link to={buildQueryString(search, "query", { cuisine: "Korean" })}>
           Korean Recipes
         </Link>
+        <Link
+          to={buildQueryString(search, "query", {
+            dietaryRequirements: "None",
+          })}
+        >
+          None
+        </Link>
+        <Link
+          to={buildQueryString(search, "query", {
+            dietaryRequirements: "Vegetarian",
+          })}
+        >
+          Vegetarian
+        </Link>
+        <Link
+          to={buildQueryString(search, "query", {
+            dietaryRequirements: "Vegan",
+          })}
+        >
+          Vegan
+        </Link>
+        <Link
+          to={buildQueryString(search, "query", {
+            dietaryRequirements: "Gluten-Free",
+          })}
+        >
+          Gluten-Free
+        </Link>
+        <Link
+          to={buildQueryString(search, "query", {
+            dietaryRequirements: "Dairy-Free",
+          })}
+        >
+          Dairy-Free
+        </Link>
+        <Link
+          to={buildQueryString(search, "query", {
+            dietaryRequirements: "Pescatarian",
+          })}
+        >
+          Pescatarian
+        </Link>
+        <Link to={buildQueryString(search, "sort", { servings: 1 })}>
+          Servings Size Ascending
+        </Link>
+        <Link to={buildQueryString(search, "sort", { servings: -1 })}>
+          Servings Size Descending
+        </Link>
         <Link to={buildQueryString(search, "sort", { totalTime: 1 })}>
           Total Time Ascending
         </Link>

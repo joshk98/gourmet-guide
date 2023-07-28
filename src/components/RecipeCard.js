@@ -2,11 +2,21 @@ import React from "react";
 
 import "../styles/recipe-card.css";
 
-const RecipeCard = ({ title, cuisine, prepTime, cookingTime, servings }) => {
+const RecipeCard = ({
+  title,
+  cuisine,
+  dietaryRequirements,
+  prepTime,
+  cookingTime,
+  servings,
+}) => {
   return (
     <div className="recipe-card" data-testid="recipe-card">
       <div className="recipe-card__title">{title}</div>
       <div className="recipe-card__cuisine">{cuisine}</div>
+      <div className="recipe-card__dietaryRequirements">
+        {dietaryRequirements}
+      </div>
       <div className="recipe-card__totalTime">
         {prepTime + cookingTime} mins
       </div>
