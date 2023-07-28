@@ -14,12 +14,12 @@
   display: flex;
   flex-direction: row;
   margin: 0;
-  padding: 0;
+  padding: 0.5em;
 }
 
 .navbar-links-item {
   margin: 0;
-  padding: .5em;
+  padding: 0.5em;
   display: inline-block;
 }
 
@@ -35,7 +35,6 @@
 
 .navbar-links-item a.active {
   font-weight: bold;
-  color: white;
 }
 
 .navbar-links-item a:after {
