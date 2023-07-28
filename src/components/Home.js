@@ -16,7 +16,7 @@ const Home = () => {
   useEffect(() => {
     setAlert({ message: "", isSuccess: false });
     axios
-      .get("http://localhost:3000/api/v1/Recipe")
+      .get("http://localhost:4000/api/v1/recipes")
       .then(({ data }) => {
         setRecipes(data);
       })
@@ -34,7 +34,7 @@ const Home = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/api/v1/Recipe${search}`)
+      .get(`http://localhost:4000/api/v1/recipes${search}`)
       .then(({ data }) => setRecipes(data))
       .catch((error) => console.error(error));
   }, [search]);
@@ -47,7 +47,7 @@ const Home = () => {
       <div className="recipes">
         <Alert message={alert.message} success={alert.isSuccess} />
         {recipes.map((recipe) => (
-          <RecipeCard key={recipe._id} {...recipe} />
+          <RecipeCard key={recipe.id} {...recipe} />
         ))}
       </div>
     </div>
