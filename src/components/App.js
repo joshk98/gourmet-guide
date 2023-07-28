@@ -5,6 +5,7 @@ import NavBar from "./NavBar";
 import CookBook from "./CookBook";
 import CreateAccount from "../pages/CreateAccount";
 import Login from "../pages/Login";
+import Home from "./Home";
 
 import "../styles/app.css";
 
@@ -16,6 +17,7 @@ const App = () => {
       <div className="app">
         <NavBar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
         <Routes>
+          <Route path="/" element={<Home />} />
           <Route path="/cookbook" element={<CookBook />} />
           <Route path="/create-a-recipe" element={<AddRecipe />} />
           <Route
