@@ -12,6 +12,9 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
 
   return (
     <nav className="navbar">
+      <div className="navbar-links-item" id="navbar-links-item__name">
+        Gourmet Guide
+      </div>
       <ul className="navbar-links">
         <li className="navbar-links-item">
           <NavLink to="/">Home</NavLink>

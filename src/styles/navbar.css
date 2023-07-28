@@ -10,10 +10,6 @@
   color: white;
 }
 
-img {
-  width: 175px;
-}
-
 .navbar-links {
   display: flex;
   flex-direction: row;
@@ -23,13 +19,14 @@ img {
 
 .navbar-links-item {
   margin: 0;
-  padding: 1em;
+  padding: .5em;
   display: inline-block;
 }
 
 .navbar-links-item a {
   text-decoration: none;
   position: relative;
+  color: white;
 }
 
 .navbar-links-item a:visited {
@@ -54,4 +51,9 @@ img {
 
 .navbar-links-item a.active:after {
   width: 100%;
+}
+
+#navbar-links-item__name {
+  font-family: "Staatliches";
+  font-size: 1.75em;
 }
