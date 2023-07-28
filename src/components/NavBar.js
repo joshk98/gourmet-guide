@@ -18,7 +18,7 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
           <NavLink to="/">Home</NavLink>
         </li>
         <li className="navbar-links-item">
-          <NavLink to="/cookbook">CookBook</NavLink>
+          <NavLink to="/cookbook">Cookbook</NavLink>
         </li>
         <li className="navbar-links-item">
           <NavLink to="/create-a-recipe">Create a Recipe</NavLink>

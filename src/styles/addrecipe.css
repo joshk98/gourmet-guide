@@ -8,7 +8,7 @@ body {
   max-width: 600px;
   margin: 30px auto;
   padding: 20px;
-  background-color: #ff6666;
+  background-color: white;
   border-radius: 8px;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
 }
@@ -21,7 +21,7 @@ body {
   display: block;
   font-weight: bold;
   margin-bottom: 5px;
-  color: #ffffff;
+  color: #ff6666;
 }
 
 .add-recipe input[type="text"],
@@ -46,10 +46,10 @@ body {
 
 .add-recipe button {
   padding: 10px 20px;
-  background-color: #ffffff;
+  background-color: #ff6666;
   border: none;
   border-radius: 4px;
-  color: #ff6666;
+  color: white;
   font-weight: bold;
   cursor: pointer;
 }
