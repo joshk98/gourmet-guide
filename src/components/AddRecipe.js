@@ -42,8 +42,6 @@ const AddRecipe = () => {
       return;
     }
 
-    console.log("Submitting data:", fields);
-
     setAlert({ message: "", isSuccess: false });
 
     axios
@@ -52,13 +50,13 @@ const AddRecipe = () => {
         setAlert({
           message: "Recipe Added",
           isSuccess: true,
-        }),
+        })
       )
       .catch(() =>
         setAlert({
           message: "Server error. Please try again later.",
           isSuccess: false,
-        }),
+        })
       );
   };
 
@@ -68,16 +66,21 @@ const AddRecipe = () => {
   };
 
   const handleAddIngredient = () => {
-    setFields({
-      ...fields,
-      ingredients: [...fields.ingredients, { name: "" }],
-    });
+    setFields((prevFields) => ({
+      ...prevFields,
+      ingredients: [
+        ...prevFields.ingredients,
+        { id: "", name: "", measurement: "" },
+      ],
+    }));
   };
 
   const handleRemoveIngredient = (index) => {
-    const updatedIngredients = [...fields.ingredients];
-    updatedIngredients.splice(index, 1);
-    setFields({ ...fields, ingredients: updatedIngredients });
+    setFields((prevFields) => {
+      const updatedIngredients = [...prevFields.ingredients];
+      updatedIngredients.splice(index, 1);
+      return { ...prevFields, ingredients: updatedIngredients };
+    });
   };
 
   const handleIngredientChange = (index, field, value) => {
@@ -154,16 +157,18 @@ const AddRecipe = () => {
             {fields.ingredients.map((ingredient, index) => (
               <div key={ingredient.id} className="ingredient-field">
                 <input
-                  type="text"
+                  id={`ingredientName-${index}`}
                   placeholder="Ingredient Name"
+                  type="text"
                   value={ingredient.name}
                   onChange={(e) =>
                     handleIngredientChange(index, "name", e.target.value)
                   }
                 />
                 <input
-                  type="text"
+                  id={`measurement-${index}`}
                   placeholder="Measurement Unit"
+                  type="text"
                   value={ingredient.measurement}
                   onChange={(e) =>
                     handleIngredientChange(index, "measurement", e.target.value)
@@ -184,6 +189,7 @@ const AddRecipe = () => {
             </button>
           </label>
         </div>
+
         <div>
           <label htmlFor="instructions">
             Instructions:

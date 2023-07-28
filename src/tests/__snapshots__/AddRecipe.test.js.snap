@@ -145,11 +145,13 @@ exports[`AddRecipe renders correctly 1`] = `
             class="ingredient-field"
           >
             <input
+              id="ingredientName-0"
               placeholder="Ingredient Name"
               type="text"
               value=""
             />
             <input
+              id="measurement-0"
               placeholder="Measurement Unit"
               type="text"
               value=""

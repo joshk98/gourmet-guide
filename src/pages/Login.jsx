@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { signIn } from "../config/Firebase";
+import { setLoggedIn } from "../config/Auth";
 import "../styles/login.css";
 
 const Login = ({ setIsLoggedIn }) => {
@@ -20,6 +21,7 @@ const Login = ({ setIsLoggedIn }) => {
       setEmail("");
       setPassword("");
 
+      setLoggedIn();
       setIsLoggedIn(true);
 
       setTimeout(() => {
