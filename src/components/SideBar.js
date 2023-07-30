@@ -81,7 +81,7 @@ const Sidebar = ({ search }) => {
             dietaryRequirements: "None",
           })}
         >
-          None
+          No Dietary Requirements
         </Link>
         <Link
           to={buildQueryString(search, "query", {

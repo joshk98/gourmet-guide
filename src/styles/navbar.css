@@ -2,11 +2,12 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  flex-wrap: wrap;
   align-items: center;
-  background-color: white;
+  background-color: #ff6666;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
   font-size: 1.25rem;
-  color: #ff6666;
+  color: white;
   padding: 0.25em;
 }
 
@@ -29,11 +30,11 @@
 .navbar-links-item a {
   text-decoration: none;
   position: relative;
-  color: #ff6666;
+  color: white;
 }
 
 .navbar-links-item a:visited {
-  color: #ff6666;
+  color: white;
 }
 
 .navbar-links-item a.active {
@@ -47,7 +48,7 @@
   height: 2px;
   bottom: -2px;
   left: 0;
-  background-color: #ff6666;
+  background-color: white;
   transition: width 0.3s ease-in-out;
 }
 
@@ -57,6 +58,6 @@
 
 .navbar-links-name {
   font-family: "Staatliches";
-  font-size: 3.25rem;
+  font-size: 2.5rem;
   margin-left: .5em;
 }

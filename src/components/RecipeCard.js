@@ -21,10 +21,10 @@ const RecipeCard = ({
         {prepTime + cookingTime} mins
       </div>
       <div className="recipe-card__servings">{servings} servings</div>
-      <button className="property-card__learnMore" type="button">
+      <button className="recipe-card__learnMore" type="button">
         Learn More
       </button>
-      <button className="property-card__addCookbook" type="button">
+      <button className="recipe-card__addCookbook" type="button">
         Add to CookBook
       </button>
     </div>

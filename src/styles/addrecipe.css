@@ -55,7 +55,7 @@ body {
 }
 
 .add-recipe button:hover {
-  background-color: #ffcccc;
+  background-color: #da5555;
 }
 
 .ingredient-field {

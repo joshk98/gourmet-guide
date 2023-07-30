@@ -4,7 +4,7 @@
   justify-content: center;
   align-items: center;
   margin: 2em;
-  padding: 2em;
+  padding: 1.25em;
   width: 15em;
   background-color: white;
   border: 1px solid white;
@@ -15,23 +15,25 @@
 
 .recipe-card__title {
   font-weight: bold;
-  padding: 0.6em;
+  font-size: 1.25rem;
 }
 
+.recipe-card__title,
 .recipe-card__cuisine,
 .recipe-card__totalTime,
+.recipe-card__dietaryRequirements,
 .recipe-card__servings {
-  font-style: italic;
-  padding: 0.6em;
+  padding: 0.5em;
 }
 
 .recipe-card__learnMore,
 .recipe-card__addCookbook {
-  margin-top: 1em;
-  padding: 1em;
-  width: 100%;
+  margin: 0.75em;
+  padding: 0.75em;
+  width: 80%;
   background-color: #ff6666;
   color: white;
+  font-weight: bold;
   border: none;
   border-radius: 0.4em;
   cursor: pointer;
@@ -39,5 +41,5 @@
 
 .recipe-card__learnMore:hover,
 .recipe-card__addCookbook:hover {
-  background-color: #ffcccc;
+  background-color: #da5555;
 }
