@@ -1,30 +1,63 @@
-* {
-  margin: 0;
-}
-
-nav {
+.navbar {
   display: flex;
-  justify-content: center;
   flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: center;
+  background-color: #ff6666;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+  font-size: 1.25rem;
+  color: white;
+  padding: 0.25em;
 }
 
-li {
-  list-style: none;
+.navbar-links {
+  display: flex;
   justify-content: space-evenly;
-  display: inline;
-  margin-right: 10px;
-
+  align-items: center;
+  flex-direction: row;
+  margin: 0;
+  padding: 0;
+  margin-right: 1.5em;
+  gap: 2em;
 }
 
-a {
+.navbar-links-item {
+  margin: 0;
+  display: inline-block;
+}
+
+.navbar-links-item a {
   text-decoration: none;
-  color: #ff6666;
-  font-size: 20px;
+  position: relative;
+  color: white;
 }
 
-@media (max-width: 600px) {
-  li {
-    display: block;
-    margin-right: 0;
-  }
+.navbar-links-item a:visited {
+  color: white;
+}
+
+.navbar-links-item a.active {
+  font-weight: bold;
+}
+
+.navbar-links-item a:after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -2px;
+  left: 0;
+  background-color: white;
+  transition: width 0.3s ease-in-out;
+}
+
+.navbar-links-item a.active:after {
+  width: 100%;
+}
+
+.navbar-links-name {
+  font-family: "Staatliches";
+  font-size: 2.5rem;
+  margin-left: .5em;
 }
