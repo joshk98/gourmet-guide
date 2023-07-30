@@ -32,7 +32,9 @@ const Sidebar = ({ search }) => {
     const newQueryString = buildQueryString(search, "query", {
       title: { $regex: query },
     });
-    navigate(newQueryString);
+    navigate(newQueryString).catch((error) => {
+      console.error("Error finding recipes:", error);
+    });
   };
 
   return (
