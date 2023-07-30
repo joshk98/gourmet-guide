@@ -90,7 +90,7 @@ const Sidebar = ({ search }) => {
             dietaryRequirements: "None",
           })}
         >
-          <FontAwesomeIcon icon={faCircleExclamation} /> No Dietary Requirements
+          <FontAwesomeIcon icon={faCircleExclamation} /> None
         </Link>
         <Link
           to={buildQueryString(search, "query", {
