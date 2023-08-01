@@ -5,24 +5,71 @@ body {
 
 .cookbook {
   display: flex;
-  justify-content: center;
+  justify-content: space-between ;
+  margin: 50px;
+  padding: 50px;
+  width: 80%;
+  border-radius: 8px;
+  font-size: 20px;
+  color: #ffffff;
 }
 
 .list {
-  display: block;
-  /* margin: 10px, 20px, 10px, 20px; */
-  color: #ff6666;
-  background-color: white;
+ display:block;
+ width: auto;
+ height: auto;
+ min-height: 60px;
+ color: #ffffff;
+ background-color: #ff6666;
+ font-size: 20px;
+ border: 1px solid #ff6666;
+ border-radius: 8px;
+ padding: 50px;
+
+}
+
+.vertical-list {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  list-style-type:none;
+}
+
+.vertical-list li {
+  padding-top: 10px;
+}
+
+
+.ingredients {
+  display: flex;
+  justify-content: space-between;
+  width: auto;
+}
+
+.ingredients-list {
+  display:block;
+  width: auto;
+  height: auto;
+  min-height: 60px;
+  color: #ffffff;
+  background-color: #ff6666;
   font-size: 20px;
-  border: 1px solid white;
+  border: 1px solid #ff6666;
   border-radius: 8px;
-  padding: 16px;
+  padding: 50px;
 }
 
-ul.vertical-list {
-  list-style-type: none;
-}
-
-ul.vertical-list li {
-  display: block;
+.instructions {
+  display: flex;
+  width: auto;
+  height: auto;
+  min-height: 60px;
+  justify-content: center;
+  background-color: #ff6666;
+  font-size: 20px;
+  border: 1px solid #ff6666; ;
+  border-radius: 8px;
+  padding: 50px;
+  flex-direction: column;
 }
