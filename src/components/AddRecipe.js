@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { v4 as uuidv4 } from "uuid";
 import "../styles/addrecipe.css";
+import Alert from "./Alert";
 
 const AddRecipe = () => {
   const initialState = {
     fields: {
       title: "",
       cuisine: "",
-      dietaryRequirements: [],
-      ingredients: [{ name: "", measurement: "" }],
+      dietaryRequirements: "",
+      ingredients: [{ id: uuidv4(), name: "", measurement: "" }],
       instructions: "",
       prepTime: "",
       cookingTime: "",
@@ -43,7 +45,7 @@ const AddRecipe = () => {
     setAlert({ message: "", isSuccess: false });
 
     axios
-      .post("http://localhost:3000/api/v1/Recipe", fields)
+      .post("http://localhost:4000/api/v1/recipes", fields)
       .then(() =>
         setAlert({
           message: "Recipe Added",
@@ -60,29 +62,25 @@ const AddRecipe = () => {
 
   const handleFieldChange = (event) => {
     const { name, value } = event.target;
-
-    if (name === "dietaryRequirements") {
-      const selectedOptions = Array.from(
-        event.target.selectedOptions,
-        (option) => option.value,
-      );
-      setFields({ ...fields, [name]: selectedOptions });
-    } else {
-      setFields({ ...fields, [name]: value });
-    }
+    setFields({ ...fields, [name]: value });
   };
 
   const handleAddIngredient = () => {
-    setFields({
-      ...fields,
-      ingredients: [...fields.ingredients, { name: "", measurement: "" }],
-    });
+    setFields((prevFields) => ({
+      ...prevFields,
+      ingredients: [
+        ...prevFields.ingredients,
+        { id: "", name: "", measurement: "" },
+      ],
+    }));
   };
 
   const handleRemoveIngredient = (index) => {
-    const updatedIngredients = [...fields.ingredients];
-    updatedIngredients.splice(index, 1);
-    setFields({ ...fields, ingredients: updatedIngredients });
+    setFields((prevFields) => {
+      const updatedIngredients = [...prevFields.ingredients];
+      updatedIngredients.splice(index, 1);
+      return { ...prevFields, ingredients: updatedIngredients };
+    });
   };
 
   const handleIngredientChange = (index, field, value) => {
@@ -144,6 +142,7 @@ const AddRecipe = () => {
               <option value="" disabled>
                 --Select a dietary requirement--
               </option>
+              <option value="None">None</option>
               <option value="Vegetarian">Vegetarian</option>
               <option value="Vegan">Vegan</option>
               <option value="Gluten-Free">Gluten-Free</option>
@@ -156,21 +155,20 @@ const AddRecipe = () => {
           <label htmlFor="ingredients">
             Ingredients:
             {fields.ingredients.map((ingredient, index) => (
-              <div
-                key={`${ingredient.name}-${ingredient.measurement}`}
-                className="ingredient-field"
-              >
+              <div key={ingredient.id} className="ingredient-field">
                 <input
-                  type="text"
+                  id={`ingredientName-${index}`}
                   placeholder="Ingredient Name"
+                  type="text"
                   value={ingredient.name}
                   onChange={(e) =>
                     handleIngredientChange(index, "name", e.target.value)
                   }
                 />
                 <input
-                  type="text"
+                  id={`measurement-${index}`}
                   placeholder="Measurement Unit"
+                  type="text"
                   value={ingredient.measurement}
                   onChange={(e) =>
                     handleIngredientChange(index, "measurement", e.target.value)
@@ -191,6 +189,7 @@ const AddRecipe = () => {
             </button>
           </label>
         </div>
+
         <div>
           <label htmlFor="instructions">
             Instructions:
@@ -246,6 +245,7 @@ const AddRecipe = () => {
           <button type="submit">Add</button>
         </div>
       </form>
+      <Alert message={alert.message} success={alert.isSuccess} />
     </div>
   );
 };
