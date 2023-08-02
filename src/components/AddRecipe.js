@@ -10,7 +10,9 @@ const AddRecipe = () => {
       title: "",
       cuisine: "",
       dietaryRequirements: "",
-      ingredients: [{ id: uuidv4(), name: "", measurement: "" }],
+      ingredients: [
+        { id: uuidv4(), name: "", measurement: { value: "", metric: "" } },
+      ],
       instructions: "",
       prepTime: "",
       cookingTime: "",
@@ -27,6 +29,7 @@ const AddRecipe = () => {
 
   const handleAddRecipe = (event) => {
     event.preventDefault();
+
     if (
       fields.title.trim() === "" ||
       fields.ingredients.length === 0 ||
@@ -50,13 +53,13 @@ const AddRecipe = () => {
         setAlert({
           message: "Recipe Added",
           isSuccess: true,
-        }),
+        })
       )
       .catch(() =>
         setAlert({
           message: "Server error. Please try again later.",
           isSuccess: false,
-        }),
+        })
       );
   };
 
@@ -70,7 +73,7 @@ const AddRecipe = () => {
       ...prevFields,
       ingredients: [
         ...prevFields.ingredients,
-        { id: "", name: "", measurement: "" },
+        { id: uuidv4(), name: "", measurement: { value: "", metric: "" } },
       ],
     }));
   };
@@ -85,7 +88,16 @@ const AddRecipe = () => {
 
   const handleIngredientChange = (index, field, value) => {
     const updatedIngredients = [...fields.ingredients];
-    updatedIngredients[index][field] = value;
+    if (field === "measurement") {
+      if (/^\d*\.?\d*$/.test(value) || value === "") {
+        updatedIngredients[index].measurement.value = value;
+      }
+    } else if (field === "metric") {
+      updatedIngredients[index].measurement.metric = value;
+    } else {
+      updatedIngredients[index][field] = value;
+    }
+
     setFields({ ...fields, ingredients: updatedIngredients });
   };
 
@@ -165,23 +177,48 @@ const AddRecipe = () => {
                     handleIngredientChange(index, "name", e.target.value)
                   }
                 />
-                <input
-                  id={`measurement-${index}`}
-                  placeholder="Measurement Unit"
-                  type="text"
-                  value={ingredient.measurement}
-                  onChange={(e) =>
-                    handleIngredientChange(index, "measurement", e.target.value)
-                  }
-                />
-                {index !== 0 && (
-                  <button
-                    type="button"
-                    onClick={() => handleRemoveIngredient(index)}
+                <div className="measurement-metric-container">
+                  <input
+                    id={`measurement-${index}`}
+                    placeholder="Measurement"
+                    type="text"
+                    value={ingredient.measurement.value}
+                    onChange={(e) =>
+                      handleIngredientChange(
+                        index,
+                        "measurement",
+                        e.target.value
+                      )
+                    }
+                    className="measurement-input"
+                  />
+                  <select
+                    id={`metric-${index}`}
+                    value={ingredient.measurement.metric}
+                    onChange={(e) =>
+                      handleIngredientChange(index, "metric", e.target.value)
+                    }
+                    className="metric-dropdown"
                   >
-                    Remove
-                  </button>
-                )}
+                    <option value="" disabled>
+                      --Select a metric--
+                    </option>
+                    <option value="g">g</option>
+                    <option value="kg">kg</option>
+                    <option value="ml">ml</option>
+                    <option value="l">l</option>
+                  </select>
+                </div>
+                <div>
+                  {index !== 0 && (
+                    <button
+                      type="button"
+                      onClick={() => handleRemoveIngredient(index)}
+                    >
+                      Remove
+                    </button>
+                  )}
+                </div>
               </div>
             ))}
             <button type="button" onClick={handleAddIngredient}>
