@@ -11,24 +11,21 @@ import {
 
 import "../styles/sidebar.css";
 
+const buildQueryString = (search, operation, valueObj) => {
+  const currentQueryParams = qs.parse(search, { ignoreQueryPrefix: true });
+  const newQueryParams = {
+    ...currentQueryParams,
+    [operation]: JSON.stringify({
+      ...JSON.parse(currentQueryParams[operation] || "{}"),
+      ...valueObj,
+    }),
+  };
+  return qs.stringify(newQueryParams, { addQueryPrefix: true, encode: false });
+};
+
 const SideBar = ({ search }) => {
   const [query, setQuery] = useState("");
   const navigate = useNavigate();
-
-  const buildQueryString = (operation, valueObj) => {
-    const currentQueryParams = qs.parse(search, { ignoreQueryPrefix: true });
-    const newQueryParams = {
-      ...currentQueryParams,
-      [operation]: JSON.stringify({
-        ...JSON.parse(currentQueryParams[operation] || "{}"),
-        ...valueObj,
-      }),
-    };
-    return qs.stringify(newQueryParams, {
-      addQueryPrefix: true,
-      encode: false,
-    });
-  };
 
   const handleSearch = (event) => {
     event.preventDefault();
@@ -56,88 +53,90 @@ const SideBar = ({ search }) => {
       </form>
       <div className="sidebar__links">
         <Link to="/">Show All</Link>
-        <Link to={buildQueryString("query", { cuisine: "Italian" })}>
+        <Link to={buildQueryString(search, "query", { cuisine: "Italian" })}>
           <FontAwesomeIcon icon={faGlobe} /> Italian
         </Link>
-        <Link to={buildQueryString("query", { cuisine: "Chinese" })}>
+        <Link to={buildQueryString(search, "query", { cuisine: "Chinese" })}>
           <FontAwesomeIcon icon={faGlobe} /> Chinese
         </Link>
-        <Link to={buildQueryString("query", { cuisine: "Japanese" })}>
+        <Link to={buildQueryString(search, "query", { cuisine: "Japanese" })}>
           <FontAwesomeIcon icon={faGlobe} /> Japanese
         </Link>
-        <Link to={buildQueryString("query", { cuisine: "Indian" })}>
+        <Link to={buildQueryString(search, "query", { cuisine: "Indian" })}>
           <FontAwesomeIcon icon={faGlobe} /> Indian
         </Link>
-        <Link to={buildQueryString("query", { cuisine: "Mexican" })}>
+        <Link to={buildQueryString(search, "query", { cuisine: "Mexican" })}>
           <FontAwesomeIcon icon={faGlobe} /> Mexican
         </Link>
-        <Link to={buildQueryString("query", { cuisine: "French" })}>
+        <Link to={buildQueryString(search, "query", { cuisine: "French" })}>
           <FontAwesomeIcon icon={faGlobe} /> French
         </Link>
-        <Link to={buildQueryString("query", { cuisine: "Thai" })}>
+        <Link to={buildQueryString(search, "query", { cuisine: "Thai" })}>
           <FontAwesomeIcon icon={faGlobe} /> Thai
         </Link>
-        <Link to={buildQueryString("query", { cuisine: "Spanish" })}>
+        <Link to={buildQueryString(search, "query", { cuisine: "Spanish" })}>
           <FontAwesomeIcon icon={faGlobe} /> Spanish
         </Link>
-        <Link to={buildQueryString("query", { cuisine: "Middle Eastern" })}>
+        <Link
+          to={buildQueryString(search, "query", { cuisine: "Middle Eastern" })}
+        >
           <FontAwesomeIcon icon={faGlobe} /> Middle Eastern
         </Link>
-        <Link to={buildQueryString("query", { cuisine: "Korean" })}>
+        <Link to={buildQueryString(search, "query", { cuisine: "Korean" })}>
           <FontAwesomeIcon icon={faGlobe} /> Korean
         </Link>
         <Link
-          to={buildQueryString("query", {
+          to={buildQueryString(search, "query", {
             dietaryRequirements: "None",
           })}
         >
           <FontAwesomeIcon icon={faCircleExclamation} /> None
         </Link>
         <Link
-          to={buildQueryString("query", {
+          to={buildQueryString(search, "query", {
             dietaryRequirements: "Vegetarian",
           })}
         >
           <FontAwesomeIcon icon={faCircleExclamation} /> Vegetarian
         </Link>
         <Link
-          to={buildQueryString("query", {
+          to={buildQueryString(search, "query", {
             dietaryRequirements: "Vegan",
           })}
         >
           <FontAwesomeIcon icon={faCircleExclamation} /> Vegan
         </Link>
         <Link
-          to={buildQueryString("query", {
+          to={buildQueryString(search, "query", {
             dietaryRequirements: "Gluten-Free",
           })}
         >
           <FontAwesomeIcon icon={faCircleExclamation} /> Gluten-Free
         </Link>
         <Link
-          to={buildQueryString("query", {
+          to={buildQueryString(search, "query", {
             dietaryRequirements: "Dairy-Free",
           })}
         >
           <FontAwesomeIcon icon={faCircleExclamation} /> Dairy-Free
         </Link>
         <Link
-          to={buildQueryString("query", {
+          to={buildQueryString(search, "query", {
             dietaryRequirements: "Pescatarian",
           })}
         >
           <FontAwesomeIcon icon={faCircleExclamation} /> Pescatarian
         </Link>
-        <Link to={buildQueryString("sort", { servings: 1 })}>
+        <Link to={buildQueryString(search, "sort", { servings: 1 })}>
           <FontAwesomeIcon icon={faPlateWheat} /> Servings Size Ascending
         </Link>
-        <Link to={buildQueryString("sort", { servings: -1 })}>
+        <Link to={buildQueryString(search, "sort", { servings: -1 })}>
           <FontAwesomeIcon icon={faPlateWheat} /> Servings Size Descending
         </Link>
-        <Link to={buildQueryString("sort", { totalTime: 1 })}>
+        <Link to={buildQueryString(search, "sort", { totalTime: 1 })}>
           <FontAwesomeIcon icon={faClock} /> Total Time Ascending
         </Link>
-        <Link to={buildQueryString("sort", { totalTime: -1 })}>
+        <Link to={buildQueryString(search, "sort", { totalTime: -1 })}>
           <FontAwesomeIcon icon={faClock} /> Total Time Descending
         </Link>
       </div>
