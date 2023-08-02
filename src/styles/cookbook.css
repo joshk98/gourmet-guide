@@ -73,3 +73,13 @@ body {
   padding: 50px;
   flex-direction: column;
 }
+
+  button {
+  padding: 10px 20px;
+  background-color: #ff6666;
+  border: solid white;
+  border-radius: 4px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
