@@ -32,7 +32,6 @@ body {
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 4px;
-  min-width: 300px;
   box-sizing: border-box;
 }
 
@@ -64,4 +63,20 @@ body {
 
 button {
   margin-top: 10px;
+}
+
+.add-recipe div .measurement-input {
+  width: calc(20%);
+  margin-top: 3px;
+  margin-right: 2px;
+  height: 34px;
+}
+
+.add-recipe div .ingredient-input,
+.add-recipe div .metric-dropdown {
+  width: 150px;
+  height: 33.9px;
+  vertical-align: middle;
+  line-height: 33px;
+  margin-right: 5px;
 }
