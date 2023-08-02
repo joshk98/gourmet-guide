@@ -11,8 +11,13 @@ const Popup = ({ recipe, handleClosePopup }) => {
     <div className="popup">
       <div className="popup-inner">
         <h2>{recipe.title}</h2>
-        <p>Cuisine: {recipe.cuisine}</p>
-        <p>Dietary Requirements: {recipe.dietaryRequirements}</p>
+        <p>
+          <strong>Cuisine:</strong> {recipe.cuisine}
+        </p>
+        <p>
+          {" "}
+          <strong>Dietary Requirements:</strong> {recipe.dietaryRequirements}
+        </p>
         <h3>Ingredients:</h3>
         <ul>
           {recipe.ingredients.map((ingredient) => (
@@ -23,12 +28,18 @@ const Popup = ({ recipe, handleClosePopup }) => {
           ))}
         </ul>
         <h3>Instructions:</h3>
-        <p>{recipe.instructions}</p>
-        <p>Prep Time: {recipe.prepTime} minutes</p>
-        <p>Cooking Time: {recipe.cookingTime} minutes</p>
-        <p>Servings: {recipe.servings}</p>
+        <p className="popup-instructions">{recipe.instructions}</p>
+        <p>
+          <strong>Prep Time:</strong> {recipe.prepTime} minutes
+        </p>
+        <p>
+          <strong>Cooking Time:</strong> {recipe.cookingTime} minutes
+        </p>
+        <p>
+          <strong>Servings:</strong> {recipe.servings}
+        </p>
         <button
-          className="popup__closeButton"
+          className="popup-closeButton"
           type="button"
           onClick={handleClosePopup}
         >
