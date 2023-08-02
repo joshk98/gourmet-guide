@@ -23,7 +23,7 @@ const buildQueryString = (search, operation, valueObj) => {
   return qs.stringify(newQueryParams, { addQueryPrefix: true, encode: false });
 };
 
-const Sidebar = ({ search }) => {
+const SideBar = ({ search }) => {
   const [query, setQuery] = useState("");
   const navigate = useNavigate();
 
@@ -144,4 +144,4 @@ const Sidebar = ({ search }) => {
   );
 };
 
-export default Sidebar;
+export default SideBar;
