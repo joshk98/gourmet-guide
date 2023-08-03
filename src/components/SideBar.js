@@ -1,144 +1,110 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import qs from "qs";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faGlobe,
-  faPlateWheat,
-  faClock,
-  faCircleExclamation,
-} from "@fortawesome/free-solid-svg-icons";
-
 import "../styles/sidebar.css";
 
-const buildQueryString = (search, operation, valueObj) => {
-  const currentQueryParams = qs.parse(search, { ignoreQueryPrefix: true });
-  const newQueryParams = {
-    ...currentQueryParams,
-    [operation]: JSON.stringify({
-      ...JSON.parse(currentQueryParams[operation] || "{}"),
-      ...valueObj,
-    }),
+const SideBar = ({ handleFilterChange, handleSortChange, handleSearch }) => {
+  const cuisines = [
+    "Italian",
+    "Chinese",
+    "Japanese",
+    "Indian",
+    "Mexican",
+    "French",
+    "Thai",
+    "Spanish",
+    "Middle Eastern",
+    "Korean",
+  ];
+  const dietaryRequirements = [
+    "None",
+    "Vegetarian",
+    "Vegan",
+    "Gluten-Free",
+    "Dairy-Free",
+    "Pescatarian",
+  ];
+
+  const [searchText, setSearchText] = useState("");
+
+  const handleSearchInputChange = (event) => {
+    setSearchText(event.target.value);
   };
-  return qs.stringify(newQueryParams, { addQueryPrefix: true, encode: false });
-};
 
-const SideBar = ({ search }) => {
-  const [query, setQuery] = useState("");
-  const navigate = useNavigate();
-
-  const handleSearch = (event) => {
-    event.preventDefault();
-    const newQueryString = buildQueryString(search, "query", {
-      title: { $regex: query },
-    });
-    navigate(newQueryString).catch((error) => {
-      console.error("Error finding recipes:", error);
-    });
+  const handleSearchClick = () => {
+    handleSearch(searchText);
   };
 
   return (
-    <div className="sidebar__container">
-      <form className="search-form" onSubmit={handleSearch}>
+    <div className="sidebar">
+      <h2>Filter Recipes</h2>
+      <div className="search-form">
         <input
-          className="search-input"
           type="text"
-          placeholder="Search by title"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
+          className="search-input"
+          placeholder="Search by Title"
+          value={searchText}
+          onChange={handleSearchInputChange}
         />
-        <button className="search-button" type="submit">
+        <button
+          type="button"
+          className="search-button"
+          onClick={handleSearchClick}
+        >
           Search
         </button>
-      </form>
-      <div className="sidebar__links">
-        <Link to="/">Show All</Link>
-        <Link to={buildQueryString(search, "query", { cuisine: "Italian" })}>
-          <FontAwesomeIcon icon={faGlobe} /> Italian
-        </Link>
-        <Link to={buildQueryString(search, "query", { cuisine: "Chinese" })}>
-          <FontAwesomeIcon icon={faGlobe} /> Chinese
-        </Link>
-        <Link to={buildQueryString(search, "query", { cuisine: "Japanese" })}>
-          <FontAwesomeIcon icon={faGlobe} /> Japanese
-        </Link>
-        <Link to={buildQueryString(search, "query", { cuisine: "Indian" })}>
-          <FontAwesomeIcon icon={faGlobe} /> Indian
-        </Link>
-        <Link to={buildQueryString(search, "query", { cuisine: "Mexican" })}>
-          <FontAwesomeIcon icon={faGlobe} /> Mexican
-        </Link>
-        <Link to={buildQueryString(search, "query", { cuisine: "French" })}>
-          <FontAwesomeIcon icon={faGlobe} /> French
-        </Link>
-        <Link to={buildQueryString(search, "query", { cuisine: "Thai" })}>
-          <FontAwesomeIcon icon={faGlobe} /> Thai
-        </Link>
-        <Link to={buildQueryString(search, "query", { cuisine: "Spanish" })}>
-          <FontAwesomeIcon icon={faGlobe} /> Spanish
-        </Link>
-        <Link
-          to={buildQueryString(search, "query", { cuisine: "Middle Eastern" })}
+      </div>
+      <div className="cuisine-filters">
+        <h3>Cuisine:</h3>
+        <ul>
+          {cuisines.map((cuisine) => (
+            <li key={cuisine}>
+              <button
+                type="button"
+                onClick={() => handleFilterChange("cuisine", cuisine)}
+              >
+                {cuisine}
+              </button>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div className="dietary-filters">
+        <h3>Dietary Requirements:</h3>
+        <ul>
+          {dietaryRequirements.map((dietary) => (
+            <li key={dietary}>
+              <button
+                type="button"
+                onClick={() => handleFilterChange("dietary", dietary)}
+              >
+                {dietary}
+              </button>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div className="sort-filters">
+        <h3>Sort by Servings:</h3>
+        <button
+          type="button"
+          onClick={() => handleFilterChange("sort", "servings")}
         >
-          <FontAwesomeIcon icon={faGlobe} /> Middle Eastern
-        </Link>
-        <Link to={buildQueryString(search, "query", { cuisine: "Korean" })}>
-          <FontAwesomeIcon icon={faGlobe} /> Korean
-        </Link>
-        <Link
-          to={buildQueryString(search, "query", {
-            dietaryRequirements: "None",
-          })}
+          Ascending
+        </button>
+        <button
+          type="button"
+          onClick={() => handleFilterChange("sort", "servings")}
         >
-          <FontAwesomeIcon icon={faCircleExclamation} /> None
-        </Link>
-        <Link
-          to={buildQueryString(search, "query", {
-            dietaryRequirements: "Vegetarian",
-          })}
-        >
-          <FontAwesomeIcon icon={faCircleExclamation} /> Vegetarian
-        </Link>
-        <Link
-          to={buildQueryString(search, "query", {
-            dietaryRequirements: "Vegan",
-          })}
-        >
-          <FontAwesomeIcon icon={faCircleExclamation} /> Vegan
-        </Link>
-        <Link
-          to={buildQueryString(search, "query", {
-            dietaryRequirements: "Gluten-Free",
-          })}
-        >
-          <FontAwesomeIcon icon={faCircleExclamation} /> Gluten-Free
-        </Link>
-        <Link
-          to={buildQueryString(search, "query", {
-            dietaryRequirements: "Dairy-Free",
-          })}
-        >
-          <FontAwesomeIcon icon={faCircleExclamation} /> Dairy-Free
-        </Link>
-        <Link
-          to={buildQueryString(search, "query", {
-            dietaryRequirements: "Pescatarian",
-          })}
-        >
-          <FontAwesomeIcon icon={faCircleExclamation} /> Pescatarian
-        </Link>
-        <Link to={buildQueryString(search, "sort", { servings: 1 })}>
-          <FontAwesomeIcon icon={faPlateWheat} /> Servings Size Ascending
-        </Link>
-        <Link to={buildQueryString(search, "sort", { servings: -1 })}>
-          <FontAwesomeIcon icon={faPlateWheat} /> Servings Size Descending
-        </Link>
-        <Link to={buildQueryString(search, "sort", { totalTime: 1 })}>
-          <FontAwesomeIcon icon={faClock} /> Total Time Ascending
-        </Link>
-        <Link to={buildQueryString(search, "sort", { totalTime: -1 })}>
-          <FontAwesomeIcon icon={faClock} /> Total Time Descending
-        </Link>
+          Descending
+        </button>
+      </div>
+      <div className="sort-filters">
+        <h3>Sort by Total Time:</h3>
+        <button type="button" onClick={() => handleSortChange("asc")}>
+          Ascending
+        </button>
+        <button type="button" onClick={() => handleSortChange("desc")}>
+          Descending
+        </button>
       </div>
     </div>
   );
