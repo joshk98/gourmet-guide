@@ -1,7 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const { v4: uuidv4 } = require("uuid");
 const cors = require("cors");
+const mongoose = require("mongoose");
 
 const app = express();
 const port = 4000;
@@ -9,48 +9,106 @@ const port = 4000;
 app.use(cors());
 app.use(bodyParser.json());
 
-const recipes = [];
+const YOUR_MONGODB_URI =
+  "mongodb+srv://gourmet-guide:ETggxEgRUMvj3HXo@gourmet-guide.siih5i2.mongodb.net/test?retryWrites=true&w=majority";
 
-app.post("/api/v1/recipes", (req, res) => {
+mongoose
+  .connect(YOUR_MONGODB_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => {
+    console.log("Connected to MongoDB");
+  })
+  .catch((error) => {
+    console.error("Error connecting to MongoDB:", error);
+  });
+
+const recipeSchema = new mongoose.Schema({
+  title: String,
+  cuisine: String,
+  dietaryRequirements: String,
+  ingredients: [
+    {
+      name: String,
+      measurement: {
+        value: Number,
+        metric: String,
+      },
+    },
+  ],
+  instructions: String,
+  prepTime: Number,
+  cookingTime: Number,
+  servings: Number,
+});
+
+const Recipe = mongoose.model("Recipe", recipeSchema);
+
+app.post("/api/v1/recipes", async (req, res) => {
   const recipeData = req.body;
-  const newRecipe = { id: uuidv4(), ...recipeData };
-  recipes.push(newRecipe);
-  res.status(201).json(newRecipe);
-});
-
-app.get("/api/v1/recipes", (req, res) => {
-  res.json(recipes);
-});
-
-app.get("/api/v1/recipes/:id", (req, res) => {
-  const { id } = req.params;
-  const recipe = recipes.find((r) => r.id === id);
-  if (!recipe) {
-    return res.status(404).json({ error: "Recipe not found" });
+  try {
+    const newRecipe = await Recipe.create(recipeData);
+    res.status(201).json(newRecipe);
+  } catch (error) {
+    console.error("Error creating recipe:", error);
+    res.status(500).json({ error: "Server error" });
   }
-  return res.json(recipe);
 });
 
-app.put("/api/v1/recipes/:id", (req, res) => {
+app.get("/api/v1/recipes", async (req, res) => {
+  try {
+    const recipes = await Recipe.find();
+    res.json(recipes);
+  } catch (error) {
+    console.error("Error fetching recipes:", error);
+    res.status(500).json({ error: "Server error" });
+  }
+});
+
+app.get("/api/v1/recipes/:id", async (req, res) => {
+  const { id } = req.params;
+  try {
+    const recipe = await Recipe.findById(id);
+    if (!recipe) {
+      return res.status(404).json({ error: "Recipe not found" });
+    }
+    res.json(recipe);
+  } catch (error) {
+    console.error("Error fetching recipe:", error);
+    res.status(500).json({ error: "Server error" });
+  }
+});
+
+app.put("/api/v1/recipes/:id", async (req, res) => {
   const { id } = req.params;
   const recipeData = req.body;
-  const recipeIndex = recipes.findIndex((recipe) => recipe.id === id);
-  if (recipeIndex === -1) {
-    return res.status(404).json({ error: "Recipe not found" });
+  try {
+    const updatedRecipe = await Recipe.findByIdAndUpdate(id, recipeData, {
+      new: true,
+    });
+    if (!updatedRecipe) {
+      return res.status(404).json({ error: "Recipe not found" });
+    }
+    res.json(updatedRecipe);
+  } catch (error) {
+    console.error("Error updating recipe:", error);
+    res.status(500).json({ error: "Server error" });
   }
-  const updatedRecipe = { ...recipes[recipeIndex], ...recipeData };
-  recipes[recipeIndex] = updatedRecipe;
-  return res.json(updatedRecipe);
 });
 
-app.delete("/api/v1/recipes/:id", (req, res) => {
+app.delete("/api/v1/recipes/:id", async (req, res) => {
   const { id } = req.params;
-  const recipeIndex = recipes.findIndex((recipe) => recipe.id === id);
-  if (recipeIndex === -1) {
-    return res.status(404).json({ error: "Recipe not found" });
+  try {
+    const deletedRecipe = await Recipe.findByIdAndDelete(id);
+    if (!deletedRecipe) {
+      return res.status(404).json({ error: "Recipe not found" });
+    }
+    res.status(204).send();
+  } catch (error) {
+    console.error("Error deleting recipe:", error);
+    res.status(500).json({ error: "Server error" });
   }
-  recipes.splice(recipeIndex, 1);
-  return res.status(204).send();
 });
 
 app.listen(port, () => {

@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { v4 as uuidv4 } from "uuid";
 import "../styles/addrecipe.css";
 import Alert from "./Alert";
 
@@ -10,9 +9,7 @@ const AddRecipe = () => {
       title: "",
       cuisine: "",
       dietaryRequirements: "",
-      ingredients: [
-        { id: uuidv4(), name: "", measurement: { value: "", metric: "" } },
-      ],
+      ingredients: [{ name: "", measurement: { value: "", metric: "" } }],
       instructions: "",
       prepTime: "",
       cookingTime: "",
@@ -73,7 +70,7 @@ const AddRecipe = () => {
       ...prevFields,
       ingredients: [
         ...prevFields.ingredients,
-        { id: uuidv4(), name: "", measurement: { value: "", metric: "" } },
+        { name: "", measurement: { value: "", metric: "" } },
       ],
     }));
   };
@@ -167,7 +164,7 @@ const AddRecipe = () => {
           <label htmlFor="ingredients">
             Ingredients:
             {fields.ingredients.map((ingredient, index) => (
-              <div key={ingredient.id} className="ingredient-field">
+              <div key={ingredient} className="ingredient-field">
                 <input
                   id={`ingredientName-${index}`}
                   placeholder="Ingredient Name"
