@@ -12,25 +12,27 @@
 .search-form {
   display: flex;
   align-items: center;
-  margin: 0.25em;
 }
 
-.search-input,
-.search-button {
+.search-input {
   padding: 0.5em;
   margin: 0;
-  border: 1px solid #ccc;
+  border: none;
   border-radius: 0.4em;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
 }
 
 .search-button {
+  padding: 0.5em 1em;
+  margin: 0.2em;
+  margin-left: 0.5em;
   background-color: #00b300;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
   border: none;
   color: white;
   font-weight: bold;
   cursor: pointer;
-  margin-left: 0.5em;
+  border-radius: 0.4em;
 }
 
 .search-button:hover {
