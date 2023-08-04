@@ -1,11 +1,7 @@
 .container {
   display: flex;
+  flex-direction: column;
   flex-wrap: wrap;
-  justify-content: left;
-}
-
-.recipes {
-  display: flex;
-  flex-wrap: wrap;
-  margin: 1em;
+  justify-content: center;
+  margin-top: 2em;
 }

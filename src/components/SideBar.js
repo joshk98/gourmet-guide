@@ -1,7 +1,12 @@
 import React, { useState } from "react";
 import "../styles/sidebar.css";
 
-const SideBar = ({ handleFilterChange, handleSortChange, handleSearch }) => {
+const SideBar = ({
+  handleFilterChange,
+  handleSortChange,
+  handleSearch,
+  handleShowAll,
+}) => {
   const cuisines = [
     "Italian",
     "Chinese",
@@ -52,6 +57,9 @@ const SideBar = ({ handleFilterChange, handleSortChange, handleSearch }) => {
           Search
         </button>
       </div>
+      <button type="button" className="show-all-button" onClick={handleShowAll}>
+        Show All
+      </button>
       <div className="cuisine-filters">
         <h3>Cuisine:</h3>
         <ul>

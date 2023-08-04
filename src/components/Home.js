@@ -31,7 +31,7 @@ const Home = () => {
         if (dietary) {
           setSelectedDietary(dietary);
           const filtered = data.filter(
-            (recipe) => recipe.dietaryRequirements === dietary
+            (recipe) => recipe.dietaryRequirements === dietary,
           );
           setFilteredRecipes(filtered);
         }
@@ -75,14 +75,14 @@ const Home = () => {
     if (filterType === "cuisine") {
       setSelectedCuisine(filterValue);
       const filtered = recipes.filter(
-        (recipe) => recipe.cuisine === filterValue
+        (recipe) => recipe.cuisine === filterValue,
       );
       setFilteredRecipes(filtered);
       updateURL(filterValue, selectedDietary, selectedSort);
     } else if (filterType === "dietary") {
       setSelectedDietary(filterValue);
       const filtered = recipes.filter(
-        (recipe) => recipe.dietaryRequirements === filterValue
+        (recipe) => recipe.dietaryRequirements === filterValue,
       );
       setFilteredRecipes(filtered);
       updateURL(selectedCuisine, filterValue, selectedSort);
@@ -120,9 +120,18 @@ const Home = () => {
 
   const handleSearch = (searchText) => {
     const filtered = recipes.filter((recipe) =>
-      recipe.title.toLowerCase().includes(searchText.toLowerCase())
+      recipe.title.toLowerCase().includes(searchText.toLowerCase()),
     );
     setFilteredRecipes(filtered);
+  };
+
+  const handleShowAll = () => {
+    setSelectedCuisine("");
+    setSelectedDietary("");
+    setSelectedSort("");
+    setSortOrder("asc");
+    setFilteredRecipes(recipes);
+    updateURL("", "", "");
   };
 
   return (
@@ -132,6 +141,7 @@ const Home = () => {
           handleFilterChange={handleFilterChange}
           handleSortChange={handleSortChange}
           handleSearch={handleSearch}
+          handleShowAll={handleShowAll}
         />
       </div>
       <div className="recipes">
