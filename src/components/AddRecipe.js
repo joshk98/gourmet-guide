@@ -27,20 +27,20 @@ const AddRecipe = () => {
   const handleAddRecipe = (event) => {
     event.preventDefault();
 
-    if (
-      fields.title.trim() === "" ||
-      fields.ingredients.length === 0 ||
-      fields.instructions.trim() === "" ||
-      fields.prepTime <= 0 ||
-      fields.cookingTime <= 0 ||
-      fields.servings <= 0
-    ) {
-      setAlert({
-        message: "Please fill in all required fields.",
-        isSuccess: false,
-      });
-      return;
-    }
+    // if (
+    //   fields.title.trim() === "" ||
+    //   fields.ingredients.length === 0 ||
+    //   fields.instructions.trim() === "" ||
+    //   fields.prepTime <= 0 ||
+    //   fields.cookingTime <= 0 ||
+    //   fields.servings <= 0
+    // ) {
+    //   setAlert({
+    //     message: "Please fill in all required fields.",
+    //     isSuccess: false,
+    //   });
+    //   return;
+    // }
 
     setAlert({ message: "", isSuccess: false });
 
@@ -110,7 +110,8 @@ const AddRecipe = () => {
               name="title"
               value={fields.title}
               onChange={handleFieldChange}
-              placeholder="Enter the title"
+              maxLength={32}
+              required
             />
           </label>
         </div>
@@ -122,6 +123,7 @@ const AddRecipe = () => {
               name="cuisine"
               value={fields.cuisine}
               onChange={handleFieldChange}
+              required
             >
               <option value="" disabled>
                 --Select a cuisine--
@@ -147,6 +149,7 @@ const AddRecipe = () => {
               name="dietaryRequirements"
               value={fields.dietaryRequirements}
               onChange={handleFieldChange}
+              required
             >
               <option value="" disabled>
                 --Select a dietary requirement--
@@ -173,11 +176,12 @@ const AddRecipe = () => {
                   onChange={(e) =>
                     handleIngredientChange(index, "name", e.target.value)
                   }
+                  required
                 />
                 <div className="measurement-metric-container">
                   <input
                     id={`measurement-${index}`}
-                    placeholder="Measurement"
+                    placeholder="#"
                     type="text"
                     value={ingredient.measurement.value}
                     onChange={(e) =>
@@ -187,6 +191,7 @@ const AddRecipe = () => {
                         e.target.value,
                       )
                     }
+                    required
                     className="measurement-input"
                   />
                   <select
@@ -195,6 +200,7 @@ const AddRecipe = () => {
                     onChange={(e) =>
                       handleIngredientChange(index, "metric", e.target.value)
                     }
+                    required
                     className="metric-dropdown"
                   >
                     <option value="" disabled>
@@ -237,7 +243,8 @@ const AddRecipe = () => {
               name="instructions"
               value={fields.instructions}
               onChange={handleFieldChange}
-              placeholder="Enter the instructions"
+              placeholder="Please enter the instructions"
+              required
             />
           </label>
         </div>
@@ -250,7 +257,9 @@ const AddRecipe = () => {
               name="prepTime"
               value={fields.prepTime}
               onChange={handleFieldChange}
-              placeholder="Enter the prep time"
+              placeholder="Please enter the prep time"
+              max={9999}
+              required
             />
           </label>
         </div>
@@ -263,7 +272,9 @@ const AddRecipe = () => {
               name="cookingTime"
               value={fields.cookingTime}
               onChange={handleFieldChange}
-              placeholder="Enter the cooking time"
+              placeholder="Please enter the cooking time"
+              max={9999}
+              required
             />
           </label>
         </div>
@@ -276,7 +287,9 @@ const AddRecipe = () => {
               name="servings"
               value={fields.servings}
               onChange={handleFieldChange}
-              placeholder="Enter the number of servings"
+              placeholder="Please enter the number of servings"
+              max={9999}
+              required
             />
           </label>
         </div>
