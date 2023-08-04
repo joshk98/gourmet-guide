@@ -35,7 +35,7 @@ const Login = ({ setIsLoggedIn }) => {
 
   return (
     <div className="login-container">
-      <h2>Login</h2>
+      <div className="login-title">Login</div>
       {alertMessage && (
         <div className={`alert ${isSuccess ? "success" : "error"}`}>
           {alertMessage}
@@ -60,7 +60,7 @@ const Login = ({ setIsLoggedIn }) => {
         </div>
         <button type="submit">Login</button>
       </form>
-      <p>
+      <p className="signup-msg">
         Don&apos;t have an account? <Link to="/sign-up">Sign Up</Link>
       </p>
     </div>
