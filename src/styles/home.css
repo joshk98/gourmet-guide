@@ -3,5 +3,33 @@
   flex-direction: column;
   flex-wrap: wrap;
   justify-content: center;
-  margin-top: 2em;
+}
+
+.recipes {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 0.75em;
+}
+
+.side-bar {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease;
+}
+
+.expand-sidebar {
+  max-height: 30em;
+}
+
+.toggle-sidebar-button {
+  margin-top: 1.25em;
+  font-size: 1.5rem;
+  color: #ff6666;
+  background: none;
+  border: none;
+  border-radius: 0.4em;
+  font-weight: bold;
+  cursor: pointer;
 }

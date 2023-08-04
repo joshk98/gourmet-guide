@@ -40,7 +40,6 @@ const SideBar = ({
 
   return (
     <div className="sidebar">
-      <h2>Filter Recipes</h2>
       <div className="search-form">
         <input
           type="text"
@@ -57,63 +56,61 @@ const SideBar = ({
           Search
         </button>
       </div>
-      <button type="button" className="show-all-button" onClick={handleShowAll}>
+      {cuisines.map((cuisine) => (
+        <button
+          key={cuisine}
+          type="button"
+          onClick={() => handleFilterChange("cuisine", cuisine)}
+          className="filter-button"
+        >
+          {cuisine}
+        </button>
+      ))}
+      {dietaryRequirements.map((dietary) => (
+        <button
+          key={dietary}
+          type="button"
+          onClick={() => handleFilterChange("dietary", dietary)}
+          className="filter-button"
+        >
+          {dietary}
+        </button>
+      ))}
+      <button
+        type="button"
+        onClick={() => handleFilterChange("sort", "servings")}
+        className="filter-button"
+      >
+        Servings Ascending
+      </button>
+      <button
+        type="button"
+        onClick={() => handleFilterChange("sort", "servings")}
+        className="filter-button"
+      >
+        Servings Descending
+      </button>
+      <button
+        type="button"
+        onClick={() => handleSortChange("asc")}
+        className="filter-button"
+      >
+        Time Ascending
+      </button>
+      <button
+        type="button"
+        onClick={() => handleSortChange("desc")}
+        className="filter-button"
+      >
+        Time Descending
+      </button>
+      <button
+        type="button"
+        className="filter-button show-all-button"
+        onClick={handleShowAll}
+      >
         Show All
       </button>
-      <div className="cuisine-filters">
-        <h3>Cuisine:</h3>
-        <ul>
-          {cuisines.map((cuisine) => (
-            <li key={cuisine}>
-              <button
-                type="button"
-                onClick={() => handleFilterChange("cuisine", cuisine)}
-              >
-                {cuisine}
-              </button>
-            </li>
-          ))}
-        </ul>
-      </div>
-      <div className="dietary-filters">
-        <h3>Dietary Requirements:</h3>
-        <ul>
-          {dietaryRequirements.map((dietary) => (
-            <li key={dietary}>
-              <button
-                type="button"
-                onClick={() => handleFilterChange("dietary", dietary)}
-              >
-                {dietary}
-              </button>
-            </li>
-          ))}
-        </ul>
-      </div>
-      <div className="sort-filters">
-        <h3>Sort by Servings:</h3>
-        <button
-          type="button"
-          onClick={() => handleFilterChange("sort", "servings")}
-        >
-          Ascending
-        </button>
-        <button
-          type="button"
-          onClick={() => handleFilterChange("sort", "servings")}
-        >
-          Descending
-        </button>
-      </div>
-      <div className="sort-filters">
-        <h3>Sort by Total Time:</h3>
-        <button type="button" onClick={() => handleSortChange("asc")}>
-          Ascending
-        </button>
-        <button type="button" onClick={() => handleSortChange("desc")}>
-          Descending
-        </button>
-      </div>
     </div>
   );
 };

@@ -2,8 +2,8 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-  margin: 1em;
+  align-items: left;
+  margin: 1.25em;
   padding: 1em;
   width: 15em;
   height: 20em;
@@ -15,22 +15,31 @@
 }
 
 .recipe-card__title {
+  align-self: center;
+  color: #ff6666;
   font-weight: bold;
-  font-size: 1.25rem;
+  font-size: 1.5rem;
+  padding: 0.5em;
 }
 
-.recipe-card__title,
 .recipe-card__cuisine,
 .recipe-card__totalTime,
 .recipe-card__dietaryRequirements,
 .recipe-card__servings {
+  margin-left: 1em;
   padding: 0.5em;
+  color: rgb(65, 64, 64);
+}
+
+.recipe-card__totalTime {
+  margin-bottom: 0.5em;
 }
 
 .recipe-card__learnMore,
 .recipe-card__addCookbook {
   margin: 0.5em;
   padding: 0.75em;
+  align-self: center;
   width: 80%;
   background-color: #ff6666;
   color: white;

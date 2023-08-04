@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import SideBar from "./SideBar";
 import RecipeCard from "./RecipeCard";
+
+import "../styles/home.css";
 
 const Home = () => {
   const [recipes, setRecipes] = useState([]);
@@ -10,6 +14,13 @@ const Home = () => {
   const [selectedCuisine, setSelectedCuisine] = useState("");
   const [selectedSort, setSelectedSort] = useState("");
   const [sortOrder, setSortOrder] = useState("asc");
+  const [isSideBarExpanded, setIsSideBarExpanded] = useState(false);
+  const [maxHeight, setMaxHeight] = useState("0px");
+
+  const toggleSideBar = () => {
+    setIsSideBarExpanded(!isSideBarExpanded);
+    setMaxHeight(isSideBarExpanded ? "0px" : "30em");
+  };
 
   useEffect(() => {
     axios
@@ -136,7 +147,10 @@ const Home = () => {
 
   return (
     <div className="container">
-      <div className="side-bar">
+      <div
+        className={`side-bar ${isSideBarExpanded ? "expand-sidebar" : ""}`}
+        style={{ maxHeight }}
+      >
         <SideBar
           handleFilterChange={handleFilterChange}
           handleSortChange={handleSortChange}
@@ -144,6 +158,13 @@ const Home = () => {
           handleShowAll={handleShowAll}
         />
       </div>
+      <button
+        className="toggle-sidebar-button"
+        type="button"
+        onClick={toggleSideBar}
+      >
+        <FontAwesomeIcon icon={faMagnifyingGlass} />
+      </button>
       <div className="recipes">
         {filteredRecipes.map((recipe) => (
           <RecipeCard key={recipe.id} {...recipe} />

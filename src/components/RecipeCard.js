@@ -54,7 +54,7 @@ const RecipeCard = ({
         Learn More
       </button>
       <button className="recipe-card__addCookbook" type="button">
-        Add to CookBook
+        Add to Cookbook
       </button>
 
       {isPopupOpen && (
