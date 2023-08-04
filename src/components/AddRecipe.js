@@ -170,7 +170,6 @@ const AddRecipe = () => {
               <div key={ingredient} className="ingredient-field">
                 <input
                   id={`ingredientName-${index}`}
-                  placeholder="Ingredient Name"
                   type="text"
                   value={ingredient.name}
                   onChange={(e) =>
@@ -243,7 +242,6 @@ const AddRecipe = () => {
               name="instructions"
               value={fields.instructions}
               onChange={handleFieldChange}
-              placeholder="Please enter the instructions"
               required
             />
           </label>
@@ -257,7 +255,6 @@ const AddRecipe = () => {
               name="prepTime"
               value={fields.prepTime}
               onChange={handleFieldChange}
-              placeholder="Please enter the prep time"
               max={9999}
               required
             />
@@ -272,7 +269,6 @@ const AddRecipe = () => {
               name="cookingTime"
               value={fields.cookingTime}
               onChange={handleFieldChange}
-              placeholder="Please enter the cooking time"
               max={9999}
               required
             />
@@ -287,7 +283,6 @@ const AddRecipe = () => {
               name="servings"
               value={fields.servings}
               onChange={handleFieldChange}
-              placeholder="Please enter the number of servings"
               max={9999}
               required
             />
