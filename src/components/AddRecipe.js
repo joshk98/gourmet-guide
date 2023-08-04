@@ -50,13 +50,13 @@ const AddRecipe = () => {
         setAlert({
           message: "Recipe Added",
           isSuccess: true,
-        })
+        }),
       )
       .catch(() =>
         setAlert({
           message: "Server error. Please try again later.",
           isSuccess: false,
-        })
+        }),
       );
   };
 
@@ -184,7 +184,7 @@ const AddRecipe = () => {
                       handleIngredientChange(
                         index,
                         "measurement",
-                        e.target.value
+                        e.target.value,
                       )
                     }
                     className="measurement-input"
@@ -209,6 +209,7 @@ const AddRecipe = () => {
                 <div>
                   {index !== 0 && (
                     <button
+                      className="form-button"
                       type="button"
                       onClick={() => handleRemoveIngredient(index)}
                     >
@@ -218,7 +219,11 @@ const AddRecipe = () => {
                 </div>
               </div>
             ))}
-            <button type="button" onClick={handleAddIngredient}>
+            <button
+              className="form-button"
+              type="button"
+              onClick={handleAddIngredient}
+            >
               Add Ingredient
             </button>
           </label>
@@ -276,7 +281,9 @@ const AddRecipe = () => {
           </label>
         </div>
         <div>
-          <button type="submit">Add</button>
+          <button className="form-button" type="submit">
+            Add
+          </button>
         </div>
       </form>
       <Alert message={alert.message} success={alert.isSuccess} />

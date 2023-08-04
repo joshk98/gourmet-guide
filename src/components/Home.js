@@ -3,6 +3,8 @@ import axios from "axios";
 import SideBar from "./SideBar";
 import RecipeCard from "./RecipeCard";
 
+import "../styles/home.css";
+
 const Home = () => {
   const [recipes, setRecipes] = useState([]);
   const [filteredRecipes, setFilteredRecipes] = useState([]);

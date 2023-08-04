@@ -3,5 +3,11 @@
   flex-direction: column;
   flex-wrap: wrap;
   justify-content: center;
-  margin-top: 2em;
+}
+
+.recipes {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
 }
