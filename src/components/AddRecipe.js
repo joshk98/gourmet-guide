@@ -50,13 +50,13 @@ const AddRecipe = () => {
         setAlert({
           message: "Recipe Added",
           isSuccess: true,
-        }),
+        })
       )
       .catch(() =>
         setAlert({
           message: "Server error. Please try again later.",
           isSuccess: false,
-        }),
+        })
       );
   };
 
@@ -184,7 +184,7 @@ const AddRecipe = () => {
                       handleIngredientChange(
                         index,
                         "measurement",
-                        e.target.value,
+                        e.target.value
                       )
                     }
                     className="measurement-input"
@@ -204,6 +204,8 @@ const AddRecipe = () => {
                     <option value="kg">kg</option>
                     <option value="ml">ml</option>
                     <option value="l">l</option>
+                    <option value="tbsp">tbsp</option>
+                    <option value="tsp">tsp</option>
                   </select>
                 </div>
                 <div>

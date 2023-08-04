@@ -22,11 +22,10 @@ const Popup = ({ recipe, handleClosePopup }) => {
         <ul>
           {recipe.ingredients.map((ingredient) => (
             <li key={ingredient.name}>
-              {ingredient.name}
               {ingredient.measurement && (
                 <span>
-                  &nbsp;{ingredient.measurement.value}{" "}
-                  {ingredient.measurement.metric}
+                  &nbsp;{ingredient.measurement.value}
+                  {ingredient.measurement.metric} {ingredient.name}
                 </span>
               )}
             </li>
