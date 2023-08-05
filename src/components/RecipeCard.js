@@ -22,6 +22,8 @@ const RecipeCard = ({
   servings,
   ingredients,
   instructions,
+  handleDelete,
+  setRefresh,
 }) => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
@@ -35,13 +37,12 @@ const RecipeCard = ({
     setIsPopupOpen(false);
   };
 
-  const handleDelete = async () => {
+  const onDeleteClick = async () => {
     try {
-      await axios.delete(`/api/v1/recipes/${recipeId}`);
-      // Handle success or update the state accordingly
+      await handleDelete(recipeId);
+      setRefresh(true);
     } catch (error) {
       console.error("Error deleting recipe:", error);
-      // Handle error or show an error message
     }
   };
 
@@ -73,7 +74,7 @@ const RecipeCard = ({
       <button
         className="recipe-card__delete"
         type="button"
-        onClick={handleDelete}
+        onClick={onDeleteClick}
       >
         <FontAwesomeIcon icon={faTrash} /> Delete
       </button>

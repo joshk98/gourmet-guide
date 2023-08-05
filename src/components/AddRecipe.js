@@ -35,13 +35,13 @@ const AddRecipe = () => {
         setAlert({
           message: "Recipe Added",
           isSuccess: true,
-        })
+        }),
       )
       .catch(() =>
         setAlert({
           message: "Server error. Please try again later.",
           isSuccess: false,
-        })
+        }),
       );
   };
 
@@ -172,7 +172,7 @@ const AddRecipe = () => {
                       handleIngredientChange(
                         index,
                         "measurement",
-                        e.target.value
+                        e.target.value,
                       )
                     }
                     required

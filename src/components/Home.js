@@ -16,11 +16,19 @@ const Home = () => {
   const [sortOrder, setSortOrder] = useState("asc");
   const [isSideBarExpanded, setIsSideBarExpanded] = useState(false);
   const [maxHeight, setMaxHeight] = useState("0px");
+  const [refresh, setRefresh] = useState(false);
 
   const toggleSideBar = () => {
     setIsSideBarExpanded(!isSideBarExpanded);
     setMaxHeight(isSideBarExpanded ? "0px" : "30em");
   };
+
+  useEffect(() => {
+    if (refresh) {
+      window.location.reload();
+      setRefresh(false);
+    }
+  }, [refresh]);
 
   useEffect(() => {
     axios
@@ -145,6 +153,16 @@ const Home = () => {
     updateURL("", "", "");
   };
 
+  const handleDelete = async (recipeId) => {
+    try {
+      await axios.delete(`http://localhost:4000/api/v1/recipes/${recipeId}`);
+      console.log("Recipe deleted:", recipeId);
+      setRefresh(true);
+    } catch (error) {
+      console.error("Error deleting recipe:", error);
+    }
+  };
+
   return (
     <div className="container">
       <div
@@ -167,7 +185,13 @@ const Home = () => {
       </button>
       <div className="recipes">
         {filteredRecipes.map((recipe) => (
-          <RecipeCard key={recipe.id} recipeId={recipe.id} {...recipe} />
+          <RecipeCard
+            key={recipe._id}
+            recipeId={recipe._id}
+            handleDelete={handleDelete}
+            setRefresh={setRefresh} // Pass the setRefresh function as a prop
+            {...recipe}
+          />
         ))}
       </div>
     </div>
