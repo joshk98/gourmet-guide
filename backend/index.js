@@ -1,8 +1,8 @@
-/* eslint-disable consistent-return */
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const mongoose = require("mongoose");
+const Favourites = require("./favourites");
 
 const app = express();
 const port = 4000;
@@ -108,6 +108,19 @@ app.delete("/api/v1/recipes/:id", async (req, res) => {
     res.status(204).send();
   } catch (error) {
     console.error("Error deleting recipe:", error);
+    res.status(500).json({ error: "Server error" });
+  }
+});
+
+app.post("/api/v1/favourites", async (req, res) => {
+  const { recipeId } = req.body;
+
+  try {
+    const newFavourite = await Favourites.create({ recipeId });
+
+    res.status(201).json(newFavourite);
+  } catch (error) {
+    console.error("Error adding recipe to favourites:", error);
     res.status(500).json({ error: "Server error" });
   }
 });

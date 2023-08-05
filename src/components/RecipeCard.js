@@ -25,6 +25,7 @@ const RecipeCard = ({
   handleDelete,
   setRefresh,
 }) => {
+  const [addedToCookbook, setAddedToCookbook] = useState(false);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   const handleOpenPopup = () => {
@@ -43,6 +44,15 @@ const RecipeCard = ({
       setRefresh(true);
     } catch (error) {
       console.error("Error deleting recipe:", error);
+    }
+  };
+
+  const handleAddToCookbook = async () => {
+    try {
+      await axios.post("http://localhost:4000/api/v1/favourites", { recipeId });
+      setAddedToCookbook(true);
+    } catch (error) {
+      console.error("Error adding recipe to cookbook:", error);
     }
   };
 
@@ -68,8 +78,13 @@ const RecipeCard = ({
       >
         Learn More
       </button>
-      <button className="recipe-card__addCookbook" type="button">
-        Add to Cookbook
+      <button
+        className="recipe-card__addCookbook"
+        type="button"
+        onClick={handleAddToCookbook}
+        disabled={addedToCookbook}
+      >
+        {addedToCookbook ? "Added to Cookbook" : "Add to Cookbook"}
       </button>
       <button
         className="recipe-card__delete"
