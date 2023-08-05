@@ -2,7 +2,6 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const mongoose = require("mongoose");
-const Favourites = require("./favourites");
 
 const app = express();
 const port = 4000;
@@ -44,7 +43,20 @@ const recipeSchema = new mongoose.Schema({
   servings: Number,
 });
 
+const favouriteSchema = new mongoose.Schema({
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: false,
+  },
+  recipeId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Recipe",
+    required: true,
+  },
+});
+
 const Recipe = mongoose.model("Recipe", recipeSchema);
+const Favourites = mongoose.model("Favourites", favouriteSchema);
 
 app.post("/api/v1/recipes", async (req, res) => {
   const recipeData = req.body;
@@ -116,11 +128,32 @@ app.post("/api/v1/favourites", async (req, res) => {
   const { recipeId } = req.body;
 
   try {
+    // Validate that the provided recipeId is a valid ObjectId
+    if (!mongoose.Types.ObjectId.isValid(recipeId)) {
+      return res.status(400).json({ error: "Invalid recipeId format" });
+    }
+
+    // Check if the referenced recipe exists
+    const existingRecipe = await Recipe.findById(recipeId);
+    if (!existingRecipe) {
+      return res.status(404).json({ error: "Recipe not found" });
+    }
+
     const newFavourite = await Favourites.create({ recipeId });
 
     res.status(201).json(newFavourite);
   } catch (error) {
     console.error("Error adding recipe to favourites:", error);
+    res.status(500).json({ error: "Server error" });
+  }
+});
+
+app.get("/api/v1/favourites", async (req, res) => {
+  try {
+    const favourites = await Favourites.find().populate("recipeId");
+    res.json(favourites);
+  } catch (error) {
+    console.error("Error fetching favorite recipes:", error);
     res.status(500).json({ error: "Server error" });
   }
 });

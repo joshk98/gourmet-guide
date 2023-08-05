@@ -49,7 +49,14 @@ const RecipeCard = ({
 
   const handleAddToCookbook = async () => {
     try {
-      await axios.post("http://localhost:4000/api/v1/favourites", { recipeId });
+      const response = await axios.post(
+        "http://localhost:4000/api/v1/favourites",
+        {
+          recipeId,
+        }
+      );
+
+      console.log("Favourite recipe added:", response.data);
       setAddedToCookbook(true);
     } catch (error) {
       console.error("Error adding recipe to cookbook:", error);
