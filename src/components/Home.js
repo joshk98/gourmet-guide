@@ -167,7 +167,7 @@ const Home = () => {
       </button>
       <div className="recipes">
         {filteredRecipes.map((recipe) => (
-          <RecipeCard key={recipe.id} {...recipe} />
+          <RecipeCard key={recipe.id} recipeId={recipe.id} {...recipe} />
         ))}
       </div>
     </div>

@@ -54,6 +54,7 @@ body {
   justify-content: center;
   width: 30%;
   margin: 2.5em auto;
+  margin-top: 2.75em;
 }
 
 .login-container button:hover {

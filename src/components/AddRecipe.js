@@ -27,21 +27,6 @@ const AddRecipe = () => {
   const handleAddRecipe = (event) => {
     event.preventDefault();
 
-    // if (
-    //   fields.title.trim() === "" ||
-    //   fields.ingredients.length === 0 ||
-    //   fields.instructions.trim() === "" ||
-    //   fields.prepTime <= 0 ||
-    //   fields.cookingTime <= 0 ||
-    //   fields.servings <= 0
-    // ) {
-    //   setAlert({
-    //     message: "Please fill in all required fields.",
-    //     isSuccess: false,
-    //   });
-    //   return;
-    // }
-
     setAlert({ message: "", isSuccess: false });
 
     axios
@@ -181,7 +166,7 @@ const AddRecipe = () => {
                   <input
                     id={`measurement-${index}`}
                     placeholder="#"
-                    type="text"
+                    type="number"
                     value={ingredient.measurement.value}
                     onChange={(e) =>
                       handleIngredientChange(
