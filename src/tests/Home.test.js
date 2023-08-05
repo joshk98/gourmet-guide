@@ -8,7 +8,7 @@ describe("Home", () => {
     const { asFragment } = render(
       <Router>
         <Home />
-      </Router>,
+      </Router>
     );
 
     expect(asFragment()).toMatchSnapshot();
