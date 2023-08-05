@@ -21,7 +21,7 @@
   font-weight: bold;
   padding: 1em;
   text-align: center;
-  margin-bottom: .75em;
+  margin-bottom: .5em;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -34,16 +34,17 @@
 .recipe-card__dietaryRequirements,
 .recipe-card__servings {
   margin-left: 2em;
-  padding: 0.5em;
+  padding: 0.25em;
   color: rgb(65, 64, 64);
 }
 
 .recipe-card__totalTime {
-  margin-bottom: 1.5em;
+  margin-bottom: 1em;
 }
 
 .recipe-card__learnMore,
-.recipe-card__addCookbook {
+.recipe-card__addCookbook,
+.recipe-card__delete {
   margin: 0.5em;
   padding: 0.75em;
   align-self: center;
@@ -54,6 +55,14 @@
   border: none;
   border-radius: 0.4em;
   cursor: pointer;
+}
+
+.recipe-card__delete {
+  background-color: rgb(65, 64, 64);
+}
+
+.recipe-card__delete:hover {
+  background-color: rgb(31, 30, 30);
 }
 
 .recipe-card__learnMore:hover,

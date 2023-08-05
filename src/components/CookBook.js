@@ -9,29 +9,29 @@ const Cookbook = () => {
 
   useEffect(() => {
     axios
-      .get("/api/recipes")
+      .get("http://localhost:4000/api/v1/recipes")
       .then((response) => setRecipes(response.data))
       .catch((error) => console.error("Error fetching recipes:", error));
   }, []);
 
-  const handleDelete = () => {
-    if (selectedRecipe) {
-      axios
-        .delete(`/api/recipes/${selectedRecipe.id}`)
-        .then(() => {
-          setRecipes(
-            recipes.filter((recipe) => recipe.id !== selectedRecipe.id),
-          );
-          setSelectedRecipe(null);
-        })
-        .catch((error) => console.error("Error deleting recipe:", error));
-    }
-  };
+  // const handleDelete = () => {
+  //   if (selectedRecipe) {
+  //     axios
+  //       .delete(`/api/recipes/${selectedRecipe.id}`)
+  //       .then(() => {
+  //         setRecipes(
+  //           recipes.filter((recipe) => recipe.id !== selectedRecipe.id),
+  //         );
+  //         setSelectedRecipe(null);
+  //       })
+  //       .catch((error) => console.error("Error deleting recipe:", error));
+  //   }
+  // };
 
   const handleKeyDown = (event, recipe) => {
     if (event.key === "Enter") {
       setSelectedRecipe(recipe);
-      handleDelete();
+      // handleDelete();
     }
   };
 
@@ -57,7 +57,7 @@ const Cookbook = () => {
             </li>
           ))}
         </ul>
-        <Button onDelete={handleDelete} />
+        {/* <Button onDelete={handleDelete} /> */}
       </div>
       <Ingredients />
       <Instructions />
