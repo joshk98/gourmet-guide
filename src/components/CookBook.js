@@ -4,15 +4,32 @@ import Button from "./Button";
 import "../styles/cookbook.css";
 
 const Cookbook = () => {
-  const [recipes, setRecipes] = useState([]);
+  const [cookbookRecipes, setCookbookRecipes] = useState([]);
   const [selectedRecipe, setSelectedRecipe] = useState(null);
 
   useEffect(() => {
-    axios
-      .get("http://localhost:4000/api/v1/recipes")
-      .then((response) => setRecipes(response.data))
-      .catch((error) => console.error("Error fetching recipes:", error));
+    async function fetchCookbookRecipes() {
+      try {
+        const response = await axios.get(
+          "http://localhost:4000/api/v1/favourites"
+        );
+        const favourites = response.data;
+        const recipeTitles = favourites.map((fav) => fav.recipeId.title);
+        setCookbookRecipes(recipeTitles);
+      } catch (error) {
+        console.error("Error fetching cookbook recipes:", error);
+      }
+    }
+
+    fetchCookbookRecipes();
   }, []);
+
+  // useEffect(() => {
+  //   axios
+  //     .get("http://localhost:4000/api/v1/recipes")
+  //     .then((response) => setRecipes(response.data))
+  //     .catch((error) => console.error("Error fetching recipes:", error));
+  // }, []);
 
   // const handleDelete = () => {
   //   if (selectedRecipe) {
@@ -38,10 +55,11 @@ const Cookbook = () => {
   return (
     <div className="cookbook">
       <div className="list">
-        <h2>My Recipes</h2>
+        <h2>My Recipes</h2>{" "}
         <ul className="vertical-list">
-          {recipes.map((recipe) => (
-            <li key={recipe.id}>
+          {cookbookRecipes.map((recipe, index) => (
+            <li key={recipe}>
+              {" "}
               <button
                 type="button"
                 className={
@@ -54,6 +72,7 @@ const Cookbook = () => {
               >
                 {recipe.name}
               </button>
+              {recipe}
             </li>
           ))}
         </ul>
