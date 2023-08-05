@@ -143,6 +143,7 @@ it("submits the form and shows success alert", async () => {
   fireEvent.change(servingsInput, { target: { value: "2" } });
 
   const addButton = getByText("Add");
+  jest.spyOn(axios, "post").mockResolvedValue({});
   fireEvent.click(addButton);
 
   await waitFor(() => {
@@ -151,6 +152,7 @@ it("submits the form and shows success alert", async () => {
     });
     expect(successAlert).toBeInTheDocument();
   });
+  axios.post.mockRestore();
 });
 
 it("shows server error alert when submission fails", async () => {
