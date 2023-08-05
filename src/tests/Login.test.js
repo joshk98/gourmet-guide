@@ -1,8 +1,16 @@
 import React from "react";
 import { render, fireEvent, waitFor } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
-import Login from "../pages/Login";
 import * as firebaseMock from "firebase-mock";
+import Cookies from "js-cookie";
+import Login from "../pages/Login";
+import { isLoggedIn, setLoggedIn, logout } from "../config/Auth";
+
+jest.mock("js-cookie", () => ({
+  get: jest.fn(),
+  set: jest.fn(),
+  remove: jest.fn(),
+}));
 
 describe("Login", () => {
   it("renders correctly", () => {
@@ -102,5 +110,33 @@ describe("Login", () => {
       const errorMessage = getByText("Incorrect email or password.");
       expect(errorMessage).toBeInTheDocument();
     });
+  });
+});
+
+describe("Authentication Functions", () => {
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
+  test("isLoggedIn should return true if the user is logged in", () => {
+    Cookies.get.mockReturnValue("true");
+    expect(isLoggedIn()).toBe(true);
+  });
+
+  test("isLoggedIn should return false if the user is not logged in", () => {
+    Cookies.get.mockReturnValue(undefined);
+    expect(isLoggedIn()).toBe(false);
+  });
+
+  test("setLoggedIn should set the user as logged in", () => {
+    setLoggedIn();
+    expect(Cookies.set).toHaveBeenCalledWith("my_app_auth", "true", {
+      expires: 7,
+    });
+  });
+
+  test("logout should remove the authentication cookie", () => {
+    logout();
+    expect(Cookies.remove).toHaveBeenCalledWith("my_app_auth");
   });
 });
