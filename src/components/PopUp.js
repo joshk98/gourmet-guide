@@ -27,7 +27,7 @@ const Popup = ({ recipe, handleClosePopup }) => {
                 {ingredient.measurement && (
                   <span className="popup-ingredient-measurement">
                     {ingredient.measurement.value}
-                    {ingredient.measurement.metric}
+                    {ingredient.measurement.metric}{" "}
                   </span>
                 )}
                 {ingredient.name}
