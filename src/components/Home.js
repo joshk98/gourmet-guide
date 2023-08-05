@@ -17,6 +17,8 @@ const Home = () => {
   const [isSideBarExpanded, setIsSideBarExpanded] = useState(false);
   const [maxHeight, setMaxHeight] = useState("0px");
   const [refresh, setRefresh] = useState(false);
+  const [cookbookRecipes, setCookbookRecipes] = useState([]);
+  const [addedToCookbook, setAddedToCookbook] = useState(false);
 
   const toggleSideBar = () => {
     setIsSideBarExpanded(!isSideBarExpanded);
@@ -163,6 +165,19 @@ const Home = () => {
     }
   };
 
+  useEffect(() => {
+    axios
+      .get("http://localhost:4000/api/v1/favourites")
+      .then(({ data }) => {
+        const cookbookRecipeIds = data.map((recipe) => recipe.recipeId);
+        console.log("Cookbook Recipes:", cookbookRecipeIds);
+        setCookbookRecipes(cookbookRecipeIds);
+      })
+      .catch((error) => {
+        console.error("Error fetching cookbook recipes: ", error);
+      });
+  }, []);
+
   return (
     <div className="container">
       <div
@@ -184,15 +199,20 @@ const Home = () => {
         <FontAwesomeIcon icon={faMagnifyingGlass} />
       </button>
       <div className="recipes">
-        {filteredRecipes.map((recipe) => (
-          <RecipeCard
-            key={recipe._id}
-            recipeId={recipe._id}
-            handleDelete={handleDelete}
-            setRefresh={setRefresh}
-            {...recipe}
-          />
-        ))}
+        {filteredRecipes.map((recipe) => {
+          const isAddedToCookbook = cookbookRecipes.includes(recipe._id);
+          return (
+            <RecipeCard
+              key={recipe._id}
+              recipeId={recipe._id}
+              handleDelete={handleDelete}
+              setRefresh={setRefresh}
+              addedToCookbook={isAddedToCookbook}
+              setAddedToCookbook={setAddedToCookbook}
+              {...recipe}
+            />
+          );
+        })}
       </div>
     </div>
   );
