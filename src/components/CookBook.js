@@ -1,17 +1,63 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import Button from "./Button";
 import "../styles/cookbook.css";
 
 const Cookbook = () => {
+  const [recipes, setRecipes] = useState([]);
+  const [selectedRecipe, setSelectedRecipe] = useState(null);
+
+  useEffect(() => {
+    axios
+      .get("/api/recipes")
+      .then((response) => setRecipes(response.data))
+      .catch((error) => console.error("Error fetching recipes:", error));
+  }, []);
+
+  const handleDelete = () => {
+    if (selectedRecipe) {
+      axios
+        .delete(`/api/recipes/${selectedRecipe.id}`)
+        .then(() => {
+          setRecipes(
+            recipes.filter((recipe) => recipe.id !== selectedRecipe.id),
+          );
+          setSelectedRecipe(null);
+        })
+        .catch((error) => console.error("Error deleting recipe:", error));
+    }
+  };
+
+  const handleKeyDown = (event, recipe) => {
+    if (event.key === "Enter") {
+      setSelectedRecipe(recipe);
+      handleDelete();
+    }
+  };
+
   return (
     <div className="cookbook">
       <div className="list">
         <h2>My Recipes</h2>
         <ul className="vertical-list">
-          <li>Recipe 1</li>
-          <li>Recipe 2</li>
-          <li>Recipe 3</li>
-          <li>Recipe 4</li>
+          {recipes.map((recipe) => (
+            <li key={recipe.id}>
+              <button
+                type="button"
+                className={
+                  selectedRecipe && selectedRecipe.id === recipe.id
+                    ? "selected"
+                    : ""
+                }
+                onClick={() => setSelectedRecipe(recipe)}
+                onKeyDown={(e) => handleKeyDown(e, recipe)}
+              >
+                {recipe.name}
+              </button>
+            </li>
+          ))}
         </ul>
+        <Button onDelete={handleDelete} />
       </div>
       <Ingredients />
       <Instructions />
