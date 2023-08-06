@@ -80,3 +80,18 @@
 .popup-instructions {
   white-space: pre-line;
 }
+
+.popup-details {
+  margin: 0;
+  margin-bottom: 0.75em;
+}
+
+.popup-preptime,
+.popup-cookingtime,
+.popup-cuisine,
+.popup-dietary,
+.popup-servings {
+  margin: 0;
+  margin-top: 0.15em;
+  margin-bottom: .15em;
+}
