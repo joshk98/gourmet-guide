@@ -5,5 +5,7 @@ body {
   font-family: 'Nunito', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: whitesmoke;
+  background-image: url(../src/images/bg.jpeg);
+  background-color: lightgray;
+  background-attachment: fixed;
 }

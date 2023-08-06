@@ -17,8 +17,6 @@ const Home = () => {
   const [isSideBarExpanded, setIsSideBarExpanded] = useState(false);
   const [maxHeight, setMaxHeight] = useState("0px");
   const [refresh, setRefresh] = useState(false);
-  const [cookbookRecipes, setCookbookRecipes] = useState([]);
-  const [addedToCookbook, setAddedToCookbook] = useState(false);
 
   const toggleSideBar = () => {
     setIsSideBarExpanded(!isSideBarExpanded);
@@ -52,7 +50,7 @@ const Home = () => {
         if (dietary) {
           setSelectedDietary(dietary);
           const filtered = data.filter(
-            (recipe) => recipe.dietaryRequirements === dietary
+            (recipe) => recipe.dietaryRequirements === dietary,
           );
           setFilteredRecipes(filtered);
         }
@@ -96,14 +94,14 @@ const Home = () => {
     if (filterType === "cuisine") {
       setSelectedCuisine(filterValue);
       const filtered = recipes.filter(
-        (recipe) => recipe.cuisine === filterValue
+        (recipe) => recipe.cuisine === filterValue,
       );
       setFilteredRecipes(filtered);
       updateURL(filterValue, selectedDietary, selectedSort);
     } else if (filterType === "dietary") {
       setSelectedDietary(filterValue);
       const filtered = recipes.filter(
-        (recipe) => recipe.dietaryRequirements === filterValue
+        (recipe) => recipe.dietaryRequirements === filterValue,
       );
       setFilteredRecipes(filtered);
       updateURL(selectedCuisine, filterValue, selectedSort);
@@ -127,21 +125,33 @@ const Home = () => {
 
   const handleSortChange = (order) => {
     setSortOrder(order);
-    const sorted = [...filteredRecipes].sort((a, b) => {
-      const totalA = a.prepTime + a.cookingTime;
-      const totalB = b.prepTime + b.cookingTime;
-      if (order === "asc") {
-        return totalA - totalB;
-      }
-      return totalB - totalA;
-    });
-    setFilteredRecipes(sorted);
-    updateURL(selectedCuisine, selectedDietary, selectedSort);
+    if (order === "nameAsc") {
+      const sorted = [...filteredRecipes].sort((a, b) =>
+        a.title.localeCompare(b.title),
+      );
+      setFilteredRecipes(sorted);
+    } else if (order === "nameDesc") {
+      const sorted = [...filteredRecipes].sort((a, b) =>
+        b.title.localeCompare(a.title),
+      );
+      setFilteredRecipes(sorted);
+    } else {
+      const sorted = [...filteredRecipes].sort((a, b) => {
+        const totalA = a.prepTime + a.cookingTime;
+        const totalB = b.prepTime + b.cookingTime;
+        if (order === "asc") {
+          return totalA - totalB;
+        }
+        return totalB - totalA;
+      });
+      setFilteredRecipes(sorted);
+      updateURL(selectedCuisine, selectedDietary, selectedSort);
+    }
   };
 
   const handleSearch = (searchText) => {
     const filtered = recipes.filter((recipe) =>
-      recipe.title.toLowerCase().includes(searchText.toLowerCase())
+      recipe.title.toLowerCase().includes(searchText.toLowerCase()),
     );
     setFilteredRecipes(filtered);
   };
@@ -165,19 +175,6 @@ const Home = () => {
     }
   };
 
-  useEffect(() => {
-    axios
-      .get("http://localhost:4000/api/v1/favourites")
-      .then(({ data }) => {
-        const cookbookRecipeIds = data.map((recipe) => recipe.recipeId);
-        console.log("Cookbook Recipes:", cookbookRecipeIds);
-        setCookbookRecipes(cookbookRecipeIds);
-      })
-      .catch((error) => {
-        console.error("Error fetching cookbook recipes: ", error);
-      });
-  }, []);
-
   return (
     <div className="container">
       <div
@@ -199,20 +196,15 @@ const Home = () => {
         <FontAwesomeIcon icon={faMagnifyingGlass} />
       </button>
       <div className="recipes">
-        {filteredRecipes.map((recipe) => {
-          const isAddedToCookbook = cookbookRecipes.includes(recipe._id);
-          return (
-            <RecipeCard
-              key={recipe._id}
-              recipeId={recipe._id}
-              handleDelete={handleDelete}
-              setRefresh={setRefresh}
-              addedToCookbook={isAddedToCookbook}
-              setAddedToCookbook={setAddedToCookbook}
-              {...recipe}
-            />
-          );
-        })}
+        {filteredRecipes.map((recipe) => (
+          <RecipeCard
+            key={recipe._id}
+            recipeId={recipe._id}
+            handleDelete={handleDelete}
+            setRefresh={setRefresh} // Pass the setRefresh function as a prop
+            {...recipe}
+          />
+        ))}
       </div>
     </div>
   );

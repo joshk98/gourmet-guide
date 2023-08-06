@@ -13,9 +13,8 @@ exports[`AddRecipe renders correctly 1`] = `
           Title:
           <input
             id="title"
-            maxlength="32"
             name="title"
-            required=""
+            placeholder="Enter the title"
             type="text"
             value=""
           />
@@ -29,7 +28,6 @@ exports[`AddRecipe renders correctly 1`] = `
           <select
             id="cuisine"
             name="cuisine"
-            required=""
           >
             <option
               disabled=""
@@ -98,7 +96,6 @@ exports[`AddRecipe renders correctly 1`] = `
           <select
             id="dietaryRequirements"
             name="dietaryRequirements"
-            required=""
           >
             <option
               disabled=""
@@ -149,68 +146,18 @@ exports[`AddRecipe renders correctly 1`] = `
           >
             <input
               id="ingredientName-0"
-              required=""
+              placeholder="Ingredient Name"
               type="text"
               value=""
             />
-            <div
-              class="measurement-metric-container"
-            >
-              <input
-                class="measurement-input"
-                id="measurement-0"
-                placeholder="#"
-                required=""
-                type="number"
-                value=""
-              />
-              <select
-                class="metric-dropdown"
-                id="metric-0"
-                required=""
-              >
-                <option
-                  disabled=""
-                  value=""
-                >
-                  --Select a metric--
-                </option>
-                <option
-                  value="g"
-                >
-                  g
-                </option>
-                <option
-                  value="kg"
-                >
-                  kg
-                </option>
-                <option
-                  value="ml"
-                >
-                  ml
-                </option>
-                <option
-                  value="l"
-                >
-                  l
-                </option>
-                <option
-                  value="tbsp"
-                >
-                  tbsp
-                </option>
-                <option
-                  value="tsp"
-                >
-                  tsp
-                </option>
-              </select>
-            </div>
-            <div />
+            <input
+              id="measurement-0"
+              placeholder="Measurement Unit"
+              type="text"
+              value=""
+            />
           </div>
           <button
-            class="form-button"
             type="button"
           >
             Add Ingredient
@@ -225,7 +172,7 @@ exports[`AddRecipe renders correctly 1`] = `
           <textarea
             id="instructions"
             name="instructions"
-            required=""
+            placeholder="Enter the instructions"
           />
         </label>
       </div>
@@ -236,9 +183,8 @@ exports[`AddRecipe renders correctly 1`] = `
           Prep Time (minutes):
           <input
             id="prepTime"
-            max="9999"
             name="prepTime"
-            required=""
+            placeholder="Enter the prep time"
             type="number"
             value=""
           />
@@ -251,9 +197,8 @@ exports[`AddRecipe renders correctly 1`] = `
           Cooking Time (minutes):
           <input
             id="cookingTime"
-            max="9999"
             name="cookingTime"
-            required=""
+            placeholder="Enter the cooking time"
             type="number"
             value=""
           />
@@ -266,9 +211,8 @@ exports[`AddRecipe renders correctly 1`] = `
           Servings:
           <input
             id="servings"
-            max="9999"
             name="servings"
-            required=""
+            placeholder="Enter the number of servings"
             type="number"
             value=""
           />
@@ -276,7 +220,6 @@ exports[`AddRecipe renders correctly 1`] = `
       </div>
       <div>
         <button
-          class="form-button"
           type="submit"
         >
           Add
