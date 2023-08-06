@@ -63,8 +63,8 @@ body {
 
 .login-container .alert {
   margin-bottom: 0.5em;
-  padding: 0.5em;
-  max-width: 385px;
+  padding: 0;
+  max-width: 100%;
   border-radius: 0.4em;
   color: white;
   text-align: center;
