@@ -80,9 +80,9 @@
 }
 
 .recipe-card__addCookbook.added {
-  background-color: rgb(43, 156, 43);
+  background-color: rgb(75, 185, 75);
 }
 
 .recipe-card__addCookbook.added:hover {
-  background-color: darkgreen;
+  background-color: rgb(32, 129, 32);
 }
