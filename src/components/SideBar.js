@@ -106,6 +106,20 @@ const SideBar = ({
       </button>
       <button
         type="button"
+        onClick={() => handleSortChange("nameAsc")}
+        className="filter-button"
+      >
+        Name Ascending
+      </button>
+      <button
+        type="button"
+        onClick={() => handleSortChange("nameDesc")}
+        className="filter-button"
+      >
+        Name Descending
+      </button>
+      <button
+        type="button"
         className="filter-button show-all-button"
         onClick={handleShowAll}
       >

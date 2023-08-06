@@ -11,7 +11,7 @@ const Cookbook = () => {
     async function fetchCookbookRecipes() {
       try {
         const response = await axios.get(
-          "http://localhost:4000/api/v1/favourites"
+          "http://localhost:4000/api/v1/favourites",
         );
         const favourites = response.data;
         const recipeTitles = favourites.map((fav) => fav.recipeId.title);
