@@ -1,65 +1,79 @@
+body {
+  font-family: "Montserrat", sans-serif;
+  margin: 0;
+}
+
 .create-account-container {
-  width: 100%;
-  max-width: 400px;
-  margin: 30px auto;
-  padding: 20px;
-  background-color: #ff6666;
-  border-radius: 8px;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+  width: 75%;
+  max-width: 30em;
+  margin: 2em auto;
+  padding: 2em;
+  background-color: white;
+  border: 1px solid white;
+  border-radius: 0.75em;
+  box-shadow: 0 0.25em 0.5em rgba(0, 0, 0, 0.25);
   text-align: center;
 }
 
 .create-account-container h2 {
-  margin-bottom: 15px;
-  color: #ffffff;
+  margin-bottom: 1em;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #ff6666;
 }
 
 .create-account-container .form-group {
-  margin-bottom: 15px;
+  margin-bottom: 1em;
 }
 
 .create-account-container label {
   display: block;
   font-weight: bold;
-  margin-bottom: 5px;
-  color: #ffffff;
+  margin-bottom: 0.25em;
+  color: #ff6666;
 }
 
 .create-account-container input {
   width: 100%;
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  min-width: 300px;
+  padding: 0.5em;
+  border: 0.0625em solid #ccc;
+  border-radius: 0.25em;
   box-sizing: border-box;
 }
 
 .create-account-container button {
-  margin-top: 20px;
-  padding: 10px 20px;
-  background-color: #ffffff;
+  padding: 0.75em;
+  background-color: #ff6666;
   border: none;
-  border-radius: 4px;
-  color: #ff6666;
+  border-radius: 0.4em;
+  color: white;
   font-weight: bold;
   cursor: pointer;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  width: 30%;
+  margin: 2.5em auto;
+  margin-top: 2.75em;
 }
 
 .create-account-container button:hover {
-  background-color: #ffcccc;
+  background-color: #da5555;
 }
 
 .create-account-container .alert {
-  margin-bottom: 10px;
-  padding: 8px;
-  max-width: 385px;
-  border-radius: 4px;
-  color: #ffffff;
+  margin-bottom: 0.5em;
+  padding: 0;
+  max-width: 100%;
+  border-radius: 0.4em;
+  color: white;
   text-align: center;
+  border: none;
 }
 
 .create-account-container .success {
   background-color: #28a745;
+  color: white;
 }
 
 .create-account-container .error {
@@ -67,18 +81,18 @@
 }
 
 .create-account-container p {
-  margin-top: 20px;
-  color: #ffffff;
+  margin-top: 1em;
+  color: #ff6666;
   text-align: center;
 }
 
 .create-account-container p a {
-  color: #ffffff;
+  color: #ff6666;
   font-weight: bold;
   text-decoration: underline;
 }
 
 .create-account-container p a:hover {
-  color: #ffcccc;
+  color: #ff6666;
   text-decoration: none;
 }

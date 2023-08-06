@@ -159,6 +159,34 @@ app.get("/api/v1/favourites", async (req, res) => {
   }
 });
 
+app.get("/api/v1/favourites/:id", async (req, res) => {
+  const { id } = req.params;
+  try {
+    const recipe = await Favourites.findById(id);
+    if (!recipe) {
+      return res.status(404).json({ error: "Recipe not found" });
+    }
+    res.json(recipe);
+  } catch (error) {
+    console.error("Error fetching recipe:", error);
+    res.status(500).json({ error: "Server error" });
+  }
+});
+
+app.delete("/api/v1/favourites/:id", async (req, res) => {
+  const { id } = req.params;
+  try {
+    const deletedRecipe = await Favourites.findByIdAndDelete(id);
+    if (!deletedRecipe) {
+      return res.status(404).json({ error: "Recipe not found" });
+    }
+    res.status(204).send();
+  } catch (error) {
+    console.error("Error deleting recipe:", error);
+    res.status(500).json({ error: "Server error" });
+  }
+});
+
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });
