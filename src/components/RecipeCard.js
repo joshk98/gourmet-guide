@@ -7,6 +7,7 @@ import {
   faClock,
   faCircleExclamation,
   faTrash,
+  faCheck,
 } from "@fortawesome/free-solid-svg-icons";
 import Popup from "./PopUp";
 
@@ -25,7 +26,12 @@ const RecipeCard = ({
   handleDelete,
   setRefresh,
 }) => {
-  const [addedToCookbook, setAddedToCookbook] = useState(false);
+  const [addedToCookbook, setAddedToCookbook] = useState(() => {
+    const localStorageValue = localStorage.getItem(
+      `addedToCookbook_${recipeId}`,
+    );
+    return localStorageValue === "true";
+  });
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   const handleOpenPopup = () => {
@@ -49,17 +55,24 @@ const RecipeCard = ({
 
   const handleAddToCookbook = async () => {
     try {
-      const response = await axios.post(
-        "http://localhost:4000/api/v1/favourites",
-        {
+      if (addedToCookbook) {
+        await axios.delete(
+          `http://localhost:4000/api/v1/favourites/${recipeId}`,
+        );
+        console.log("Recipe removed from cookbook");
+      } else {
+        await axios.post("http://localhost:4000/api/v1/favourites", {
           recipeId,
-        }
+        });
+        console.log("Recipe added to cookbook");
+      }
+      setAddedToCookbook(!addedToCookbook);
+      localStorage.setItem(
+        `addedToCookbook_${recipeId}`,
+        !addedToCookbook ? "true" : "false",
       );
-
-      console.log("Favourite recipe added:", response.data);
-      setAddedToCookbook(true);
     } catch (error) {
-      console.error("Error adding recipe to cookbook:", error);
+      console.error("Error adding/removing recipe from cookbook:", error);
     }
   };
 
@@ -89,9 +102,15 @@ const RecipeCard = ({
         className="recipe-card__addCookbook"
         type="button"
         onClick={handleAddToCookbook}
-        disabled={addedToCookbook}
+        disabled={!addedToCookbook}
       >
-        {addedToCookbook ? "Added to Cookbook" : "Add to Cookbook"}
+        {addedToCookbook ? (
+          <span>
+            Added <FontAwesomeIcon icon={faCheck} />
+          </span>
+        ) : (
+          <span>Add to Cookbook</span>
+        )}
       </button>
       <button
         className="recipe-card__delete"
