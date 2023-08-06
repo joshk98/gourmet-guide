@@ -55,24 +55,19 @@ const RecipeCard = ({
 
   const handleAddToCookbook = async () => {
     try {
-      if (addedToCookbook) {
-        await axios.delete(
-          `http://localhost:4000/api/v1/favourites/${recipeId}`,
-        );
-        console.log("Recipe removed from cookbook");
-      } else {
-        await axios.post("http://localhost:4000/api/v1/favourites", {
+      const response = await axios.post(
+        "http://localhost:4000/api/v1/favourites",
+        {
           recipeId,
-        });
-        console.log("Recipe added to cookbook");
-      }
-      setAddedToCookbook(!addedToCookbook);
-      localStorage.setItem(
-        `addedToCookbook_${recipeId}`,
-        !addedToCookbook ? "true" : "false",
+        },
       );
+
+      console.log("Favourite recipe added:", response.data);
+      setAddedToCookbook(true);
+
+      localStorage.setItem(`addedToCookbook_${recipeId}`, "true");
     } catch (error) {
-      console.error("Error adding/removing recipe from cookbook:", error);
+      console.error("Error adding recipe to cookbook:", error);
     }
   };
 
@@ -102,7 +97,7 @@ const RecipeCard = ({
         className="recipe-card__addCookbook"
         type="button"
         onClick={handleAddToCookbook}
-        disabled={!addedToCookbook}
+        disabled={addedToCookbook}
       >
         {addedToCookbook ? (
           <span>

@@ -173,27 +173,16 @@ app.get("/api/v1/favourites/:id", async (req, res) => {
   }
 });
 
-app.delete("/api/v1/favourites/:recipeId", async (req, res) => {
-  const { recipeId } = req.params;
-
+app.delete("/api/v1/favourites/:id", async (req, res) => {
+  const { id } = req.params;
   try {
-    // Validate that the provided recipeId is a valid ObjectId
-    if (!mongoose.Types.ObjectId.isValid(recipeId)) {
-      return res.status(400).json({ error: "Invalid recipeId format" });
-    }
-
-    // Check if the referenced recipe exists
-    const existingRecipe = await Recipe.findById(recipeId);
-    if (!existingRecipe) {
+    const deletedRecipe = await Favourites.findByIdAndDelete(id);
+    if (!deletedRecipe) {
       return res.status(404).json({ error: "Recipe not found" });
     }
-
-    // Remove the recipe from favorites
-    await Favourites.findOneAndDelete({ recipeId });
-
-    res.status(200).json({ message: "Recipe removed from favorites" });
+    res.status(204).send();
   } catch (error) {
-    console.error("Error removing recipe from favorites:", error);
+    console.error("Error deleting recipe:", error);
     res.status(500).json({ error: "Server error" });
   }
 });
