@@ -7,7 +7,9 @@ import {
   faClock,
   faCircleExclamation,
   faTrash,
+  faPlus,
   faCheck,
+  faInfoCircle,
 } from "@fortawesome/free-solid-svg-icons";
 import Popup from "./PopUp";
 
@@ -55,19 +57,40 @@ const RecipeCard = ({
 
   const handleAddToCookbook = async () => {
     try {
-      const response = await axios.post(
-        "http://localhost:4000/api/v1/favourites",
-        {
-          recipeId,
-        },
+      if (addedToCookbook) {
+        const response = await axios.get(
+          `http://localhost:4000/api/v1/favourites?recipeId=${recipeId}`,
+        );
+
+        if (response.data.length === 0) {
+          console.error("Recipe not found in cookbook");
+          return;
+        }
+
+        const cookbookEntryId = response.data[0]._id;
+        await axios.delete(
+          `http://localhost:4000/api/v1/favourites/${cookbookEntryId}`,
+        );
+        console.log("Recipe removed from cookbook");
+        setAddedToCookbook(false);
+      } else {
+        const response = await axios.post(
+          "http://localhost:4000/api/v1/favourites",
+          {
+            recipeId,
+          },
+        );
+
+        console.log("Recipe added to cookbook:", response.data);
+        setAddedToCookbook(true);
+      }
+
+      localStorage.setItem(
+        `addedToCookbook_${recipeId}`,
+        addedToCookbook ? "false" : "true",
       );
-
-      console.log("Favourite recipe added:", response.data);
-      setAddedToCookbook(true);
-
-      localStorage.setItem(`addedToCookbook_${recipeId}`, "true");
     } catch (error) {
-      console.error("Error adding recipe to cookbook:", error);
+      console.error("Error modifying recipe in cookbook:", error);
     }
   };
 
@@ -91,22 +114,24 @@ const RecipeCard = ({
         type="button"
         onClick={handleOpenPopup}
       >
-        Learn More
+        <FontAwesomeIcon icon={faInfoCircle} /> Learn More
       </button>
       <button
-        className="recipe-card__addCookbook"
+        className={`recipe-card__addCookbook ${addedToCookbook ? "added" : ""}`}
         type="button"
         onClick={handleAddToCookbook}
-        disabled={addedToCookbook}
       >
         {addedToCookbook ? (
           <span>
-            Added <FontAwesomeIcon icon={faCheck} />
+            <FontAwesomeIcon icon={faCheck} /> Added
           </span>
         ) : (
-          <span>Add to Cookbook</span>
+          <span>
+            <FontAwesomeIcon icon={faPlus} /> Add to Cookbook
+          </span>
         )}
       </button>
+
       <button
         className="recipe-card__delete"
         type="button"
