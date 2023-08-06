@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -28,12 +28,7 @@ const RecipeCard = ({
   handleDelete,
   setRefresh,
 }) => {
-  const [addedToCookbook, setAddedToCookbook] = useState(() => {
-    const localStorageValue = localStorage.getItem(
-      `addedToCookbook_${recipeId}`,
-    );
-    return localStorageValue === "true";
-  });
+  const [addedToCookbook, setAddedToCookbook] = useState(false);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   const handleOpenPopup = () => {
@@ -54,6 +49,24 @@ const RecipeCard = ({
       console.error("Error deleting recipe:", error);
     }
   };
+
+  useEffect(() => {
+    const checkRecipeInCookbook = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:4000/api/v1/favourites?recipeId=${recipeId}`,
+        );
+
+        if (response.data.some((entry) => entry.recipeId._id === recipeId)) {
+          setAddedToCookbook(true);
+        }
+      } catch (error) {
+        console.error("Error checking recipe in cookbook:", error);
+      }
+    };
+
+    checkRecipeInCookbook();
+  }, [recipeId]);
 
   const handleAddToCookbook = async () => {
     try {
