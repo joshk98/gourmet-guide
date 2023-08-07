@@ -1,11 +1,11 @@
-/* body {
+body {
   font-family: "Montserrat", sans-serif;
   margin: 0;
 }
 
 .cookbook {
   display: flex;
-  justify-content: space-between ;
+  justify-content: center ;
   margin: 50px;
   padding: 50px;
   width: 80%;
@@ -47,32 +47,6 @@
   width: auto;
 }
 
-.ingredients-list {
-  display:block;
-  width: auto;
-  height: auto;
-  min-height: 60px;
-  color: #ffffff;
-  background-color: #ff6666;
-  font-size: 20px;
-  border: 1px solid #ff6666;
-  border-radius: 8px;
-  padding: 50px;
-}
-
-.instructions {
-  display: flex;
-  width: auto;
-  height: auto;
-  min-height: 60px;
-  justify-content: center;
-  background-color: #ff6666;
-  font-size: 20px;
-  border: 1px solid #ff6666; ;
-  border-radius: 8px;
-  padding: 50px;
-  flex-direction: column;
-}
 
   button {
   padding: 10px 20px;
@@ -83,4 +57,4 @@
   color: white;
   font-weight: bold;
   cursor: pointer;
-} */
+}
