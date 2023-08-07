@@ -27,17 +27,16 @@ const RecipeCard = ({
   instructions,
   handleDelete,
   setRefresh,
+  isLoggedIn,
 }) => {
   const [addedToCookbook, setAddedToCookbook] = useState(false);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   const handleOpenPopup = () => {
-    console.log("Opening popup");
     setIsPopupOpen(true);
   };
 
   const handleClosePopup = () => {
-    console.log("Closing popup");
     setIsPopupOpen(false);
   };
 
@@ -54,7 +53,7 @@ const RecipeCard = ({
     const checkRecipeInCookbook = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:4000/api/v1/favourites?recipeId=${recipeId}`,
+          `http://localhost:4000/api/v1/favourites?recipeId=${recipeId}`
         );
 
         if (response.data.some((entry) => entry.recipeId._id === recipeId)) {
@@ -72,7 +71,7 @@ const RecipeCard = ({
     try {
       if (addedToCookbook) {
         const response = await axios.get(
-          `http://localhost:4000/api/v1/favourites?recipeId=${recipeId}`,
+          `http://localhost:4000/api/v1/favourites?recipeId=${recipeId}`
         );
 
         if (response.data.length === 0) {
@@ -82,7 +81,7 @@ const RecipeCard = ({
 
         const cookbookEntryId = response.data[0]._id;
         await axios.delete(
-          `http://localhost:4000/api/v1/favourites/${cookbookEntryId}`,
+          `http://localhost:4000/api/v1/favourites/${cookbookEntryId}`
         );
         console.log("Recipe removed from cookbook");
         setAddedToCookbook(false);
@@ -91,7 +90,7 @@ const RecipeCard = ({
           "http://localhost:4000/api/v1/favourites",
           {
             recipeId,
-          },
+          }
         );
 
         console.log("Recipe added to cookbook:", response.data);
@@ -100,7 +99,7 @@ const RecipeCard = ({
 
       localStorage.setItem(
         `addedToCookbook_${recipeId}`,
-        addedToCookbook ? "false" : "true",
+        addedToCookbook ? "false" : "true"
       );
     } catch (error) {
       console.error("Error modifying recipe in cookbook:", error);
@@ -129,29 +128,34 @@ const RecipeCard = ({
       >
         <FontAwesomeIcon icon={faInfoCircle} /> Learn More
       </button>
-      <button
-        className={`recipe-card__addCookbook ${addedToCookbook ? "added" : ""}`}
-        type="button"
-        onClick={handleAddToCookbook}
-      >
-        {addedToCookbook ? (
-          <span>
-            <FontAwesomeIcon icon={faCheck} /> Added
-          </span>
-        ) : (
-          <span>
-            <FontAwesomeIcon icon={faPlus} /> Add to Cookbook
-          </span>
-        )}
-      </button>
-
-      <button
-        className="recipe-card__delete"
-        type="button"
-        onClick={onDeleteClick}
-      >
-        <FontAwesomeIcon icon={faTrash} /> Delete
-      </button>
+      {isLoggedIn && (
+        <button
+          className={`recipe-card__addCookbook ${
+            addedToCookbook ? "added" : ""
+          }`}
+          type="button"
+          onClick={handleAddToCookbook}
+        >
+          {addedToCookbook ? (
+            <span>
+              <FontAwesomeIcon icon={faCheck} /> Added
+            </span>
+          ) : (
+            <span>
+              <FontAwesomeIcon icon={faPlus} /> Add to Cookbook
+            </span>
+          )}
+        </button>
+      )}
+      {isLoggedIn && (
+        <button
+          className="recipe-card__delete"
+          type="button"
+          onClick={onDeleteClick}
+        >
+          <FontAwesomeIcon icon={faTrash} /> Delete
+        </button>
+      )}
 
       {isPopupOpen && (
         <Popup
