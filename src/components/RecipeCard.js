@@ -149,6 +149,7 @@ const RecipeCard = ({
         className="recipe-card__delete"
         type="button"
         onClick={onDeleteClick}
+        disabled={addedToCookbook}
       >
         <FontAwesomeIcon icon={faTrash} /> Delete
       </button>
