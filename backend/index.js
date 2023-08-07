@@ -1,4 +1,3 @@
-/* eslint-disable consistent-return */
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
@@ -129,12 +128,10 @@ app.post("/api/v1/favourites", async (req, res) => {
   const { recipeId } = req.body;
 
   try {
-    // Validate that the provided recipeId is a valid ObjectId
     if (!mongoose.Types.ObjectId.isValid(recipeId)) {
       return res.status(400).json({ error: "Invalid recipeId format" });
     }
 
-    // Check if the referenced recipe exists
     const existingRecipe = await Recipe.findById(recipeId);
     if (!existingRecipe) {
       return res.status(404).json({ error: "Recipe not found" });
