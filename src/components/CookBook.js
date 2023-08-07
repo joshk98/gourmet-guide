@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Popup from "./PopUp";
+import FavouritesPopUp from "./CookBookPopUp";
 import "../styles/cookbook.css";
 
 const Cookbook = () => {
@@ -42,7 +42,7 @@ const Cookbook = () => {
         <h2>My Recipes</h2>
 
         <ul className="vertical-list">
-          {cookbookRecipes.map((recipe, index) => (
+          {cookbookRecipes.map((recipe) => (
             <li key={recipe}>
               <button
                 type="button"
@@ -59,7 +59,7 @@ const Cookbook = () => {
         </ul>
       </div>
       {isPopUpOpen && selectedRecipe && (
-        <Popup
+        <FavouritesPopUp
           recipe={selectedRecipe}
           handleClose={() => setIsPopUpOpen(false)}
         />
