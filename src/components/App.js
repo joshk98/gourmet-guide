@@ -17,7 +17,12 @@ const App = () => {
       <div className="app">
         <NavBar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route
+            path="/"
+            element={
+              <Home isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+            }
+          />
           <Route path="/cookbook" element={<CookBook />} />
           <Route path="/create-a-recipe" element={<AddRecipe />} />
           <Route
