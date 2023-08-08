@@ -128,36 +128,29 @@ const RecipeCard = ({
       >
         <FontAwesomeIcon icon={faInfoCircle} /> Learn More
       </button>
-      {isLoggedIn && (
-        <button
-          className={`recipe-card__addCookbook ${
-            addedToCookbook ? "added" : ""
-          }`}
-          type="button"
-          onClick={handleAddToCookbook}
-        >
-          {addedToCookbook ? (
-            <span>
-              <FontAwesomeIcon icon={faCheck} /> Added
-            </span>
-          ) : (
-            <span>
-              <FontAwesomeIcon icon={faPlus} /> Add to Cookbook
-            </span>
-          )}
-        </button>
-      )}
-      {isLoggedIn && (
-        <button
-          className="recipe-card__delete"
-          type="button"
-          onClick={onDeleteClick}
-          disabled={addedToCookbook}
-        >
-          <FontAwesomeIcon icon={faTrash} /> Delete
-        </button>
-      )}
-
+      <button
+        className={`recipe-card__addCookbook ${addedToCookbook ? "added" : ""}`}
+        type="button"
+        onClick={handleAddToCookbook}
+      >
+        {addedToCookbook ? (
+          <span>
+            <FontAwesomeIcon icon={faCheck} /> Added
+          </span>
+        ) : (
+          <span>
+            <FontAwesomeIcon icon={faPlus} /> Add to Cookbook
+          </span>
+        )}
+      </button>
+      <button
+        className="recipe-card__delete"
+        type="button"
+        onClick={onDeleteClick}
+        disabled={addedToCookbook}
+      >
+        <FontAwesomeIcon icon={faTrash} /> Delete
+      </button>
       {isPopupOpen && (
         <Popup
           recipe={{
