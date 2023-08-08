@@ -21,12 +21,16 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
         <li className="navbar-links-item">
           <NavLink to="/">Home</NavLink>
         </li>
-        <li className="navbar-links-item">
-          <NavLink to="/cookbook">Cookbook</NavLink>
-        </li>
-        <li className="navbar-links-item">
-          <NavLink to="/create-a-recipe">Create a Recipe</NavLink>
-        </li>
+        {isLoggedIn && (
+          <li className="navbar-links-item">
+            <NavLink to="/cookbook">Cookbook</NavLink>
+          </li>
+        )}
+        {isLoggedIn && (
+          <li className="navbar-links-item">
+            <NavLink to="/create-a-recipe">Create a Recipe</NavLink>
+          </li>
+        )}
         <li className="navbar-links-item">
           {isLoggedIn ? (
             <NavLink to="/" onClick={handleLogout}>

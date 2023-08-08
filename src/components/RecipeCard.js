@@ -27,17 +27,16 @@ const RecipeCard = ({
   instructions,
   handleDelete,
   setRefresh,
+  isLoggedIn,
 }) => {
   const [addedToCookbook, setAddedToCookbook] = useState(false);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   const handleOpenPopup = () => {
-    console.log("Opening popup");
     setIsPopupOpen(true);
   };
 
   const handleClosePopup = () => {
-    console.log("Closing popup");
     setIsPopupOpen(false);
   };
 
@@ -129,30 +128,35 @@ const RecipeCard = ({
       >
         <FontAwesomeIcon icon={faInfoCircle} /> Learn More
       </button>
-      <button
-        className={`recipe-card__addCookbook ${addedToCookbook ? "added" : ""}`}
-        type="button"
-        onClick={handleAddToCookbook}
-      >
-        {addedToCookbook ? (
-          <span>
-            <FontAwesomeIcon icon={faCheck} /> Added
-          </span>
-        ) : (
-          <span>
-            <FontAwesomeIcon icon={faPlus} /> Add to Cookbook
-          </span>
-        )}
-      </button>
-
-      <button
-        className="recipe-card__delete"
-        type="button"
-        onClick={onDeleteClick}
-        disabled={addedToCookbook}
-      >
-        <FontAwesomeIcon icon={faTrash} /> Delete
-      </button>
+      {isLoggedIn && (
+        <button
+          className={`recipe-card__addCookbook ${
+            addedToCookbook ? "added" : ""
+          }`}
+          type="button"
+          onClick={handleAddToCookbook}
+        >
+          {addedToCookbook ? (
+            <span>
+              <FontAwesomeIcon icon={faCheck} /> Added
+            </span>
+          ) : (
+            <span>
+              <FontAwesomeIcon icon={faPlus} /> Add to Cookbook
+            </span>
+          )}
+        </button>
+      )}
+      {isLoggedIn && (
+        <button
+          className="recipe-card__delete"
+          type="button"
+          onClick={onDeleteClick}
+          disabled={addedToCookbook}
+        >
+          <FontAwesomeIcon icon={faTrash} /> Delete
+        </button>
+      )}
 
       {isPopupOpen && (
         <Popup

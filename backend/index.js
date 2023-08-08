@@ -1,4 +1,3 @@
-/* eslint-disable consistent-return */
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");

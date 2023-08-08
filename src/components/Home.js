@@ -7,7 +7,7 @@ import RecipeCard from "./RecipeCard";
 
 import "../styles/home.css";
 
-const Home = () => {
+const Home = ({ isLoggedIn }) => {
   const [recipes, setRecipes] = useState([]);
   const [filteredRecipes, setFilteredRecipes] = useState([]);
   const [selectedDietary, setSelectedDietary] = useState("");
@@ -52,7 +52,7 @@ const Home = () => {
         if (dietary) {
           setSelectedDietary(dietary);
           const filtered = data.filter(
-            (recipe) => recipe.dietaryRequirements === dietary,
+            (recipe) => recipe.dietaryRequirements === dietary
           );
           setFilteredRecipes(filtered);
         }
@@ -96,14 +96,14 @@ const Home = () => {
     if (filterType === "cuisine") {
       setSelectedCuisine(filterValue);
       const filtered = recipes.filter(
-        (recipe) => recipe.cuisine === filterValue,
+        (recipe) => recipe.cuisine === filterValue
       );
       setFilteredRecipes(filtered);
       updateURL(filterValue, selectedDietary, selectedSort);
     } else if (filterType === "dietary") {
       setSelectedDietary(filterValue);
       const filtered = recipes.filter(
-        (recipe) => recipe.dietaryRequirements === filterValue,
+        (recipe) => recipe.dietaryRequirements === filterValue
       );
       setFilteredRecipes(filtered);
       updateURL(selectedCuisine, filterValue, selectedSort);
@@ -129,12 +129,12 @@ const Home = () => {
     setSortOrder(order);
     if (order === "nameAsc") {
       const sorted = [...filteredRecipes].sort((a, b) =>
-        a.title.localeCompare(b.title),
+        a.title.localeCompare(b.title)
       );
       setFilteredRecipes(sorted);
     } else if (order === "nameDesc") {
       const sorted = [...filteredRecipes].sort((a, b) =>
-        b.title.localeCompare(a.title),
+        b.title.localeCompare(a.title)
       );
       setFilteredRecipes(sorted);
     } else {
@@ -153,7 +153,7 @@ const Home = () => {
 
   const handleSearch = (searchText) => {
     const filtered = recipes.filter((recipe) =>
-      recipe.title.toLowerCase().includes(searchText.toLowerCase()),
+      recipe.title.toLowerCase().includes(searchText.toLowerCase())
     );
     setFilteredRecipes(filtered);
   };
@@ -221,6 +221,7 @@ const Home = () => {
               setRefresh={setRefresh}
               addedToCookbook={isAddedToCookbook}
               setAddedToCookbook={setAddedToCookbook}
+              isLoggedIn={isLoggedIn}
               {...recipe}
             />
           );
