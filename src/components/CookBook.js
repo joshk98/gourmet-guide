@@ -1,69 +1,85 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
-import Popup from "./PopUp";
+import { v4 as uuidv4 } from "uuid";
+
 import "../styles/cookbook.css";
 
 const Cookbook = () => {
-  const [cookbookRecipes, setCookbookRecipes] = useState([]);
-  const [selectedRecipe, setSelectedRecipe] = useState(null);
-  const [isPopUpOpen, setIsPopUpOpen] = useState(false);
+  const [recipes, setRecipes] = useState([]);
 
-  useEffect(() => {
-    async function fetchCookbookRecipes() {
-      try {
-        const response = await axios.get(
-          "http://localhost:4000/api/v1/favourites",
-        );
-        const favourites = response.data;
-        const recipeTitles = favourites.map((fav) => fav.recipeId.title);
-        setCookbookRecipes(recipeTitles);
-      } catch (error) {
-        console.error("Error fetching cookbook recipes:", error);
-      }
-    }
-
-    fetchCookbookRecipes();
-  }, []);
-
-  const handleKeyDown = (event, recipe) => {
-    if (event.key === "Enter") {
-      setSelectedRecipe(recipe);
-    }
+  const fetchRecipes = () => {
+    axios
+      .get("http://localhost:4000/api/v1/favourites")
+      .then((response) => {
+        setRecipes(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching favourite recipes:", error);
+      });
   };
 
-  const handleOpenPopUp = (recipe) => {
-    setSelectedRecipe(recipe);
-    setIsPopUpOpen(true);
+  useEffect(() => {
+    fetchRecipes();
+  }, []);
+
+  const handleRemove = (recipeId) => {
+    axios
+      .delete(`http://localhost:4000/api/v1/favourites/${recipeId}`)
+      .then(() => {
+        fetchRecipes();
+      })
+      .catch((error) => {
+        console.error("Error removing recipe:", error);
+      });
+  };
+
+  const [expandedGroceryList, setExpandedGroceryList] = useState({});
+  const toggleGroceryList = (recipeId) => {
+    setExpandedGroceryList((prevState) => ({
+      ...prevState,
+      [recipeId]: !prevState[recipeId],
+    }));
   };
 
   return (
-    <div className="cookbook">
-      <div className="list">
-        <h2>My Recipes</h2>
-
-        <ul className="vertical-list">
-          {cookbookRecipes.map((recipe, index) => (
-            <li key={recipe}>
+    <div className="cookbook-container">
+      {recipes.map((recipe) => (
+        <div key={uuidv4()} className="recipe">
+          <div className="recipe-row">
+            <h2 className="recipe-title">{recipe.recipeId.title}</h2>
+            <div className="cookbook-button">
               <button
                 type="button"
-                className={
-                  selectedRecipe && selectedRecipe === recipe ? "selected" : ""
-                }
-                onClick={() => handleOpenPopUp(recipe)}
-                onKeyDown={(e) => handleKeyDown(e, recipe)}
+                className="list-button"
+                onClick={() => toggleGroceryList(recipe._id)}
               >
-                {recipe}
+                {expandedGroceryList[recipe._id] ? "Hide List" : "Show List"}
               </button>
-            </li>
-          ))}
-        </ul>
-      </div>
-      {isPopUpOpen && selectedRecipe && (
-        <Popup
-          recipe={selectedRecipe}
-          handleClose={() => setIsPopUpOpen(false)}
-        />
-      )}
+              <button
+                type="button"
+                className="remove-button"
+                onClick={() => handleRemove(recipe._id)}
+              >
+                Remove
+              </button>
+            </div>
+          </div>
+          <div className="grocery-list">
+            <ul>
+              {expandedGroceryList[recipe._id]
+                ? recipe.recipeId.ingredients
+                    .sort((a, b) => a.name.localeCompare(b.name))
+                    .map((ingredient) => (
+                      <li key={uuidv4()}>
+                        {ingredient.measurement.value}{" "}
+                        {ingredient.measurement.metric} {ingredient.name}
+                      </li>
+                    ))
+                : null}
+            </ul>
+          </div>
+        </div>
+      ))}
     </div>
   );
 };
