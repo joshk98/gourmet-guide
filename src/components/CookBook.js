@@ -45,21 +45,25 @@ const Cookbook = () => {
     <div className="cookbook-container">
       {recipes.map((recipe) => (
         <div key={uuidv4()} className="recipe">
-          <h2 className="recipe-title">{recipe.recipeId.title}</h2>
-          <button
-            type="button"
-            className="more-button"
-            onClick={() => toggleGroceryList(recipe._id)}
-          >
-            {expandedGroceryList[recipe._id] ? "Hide List" : "Show List"}
-          </button>
-          <button
-            type="button"
-            className="remove-button"
-            onClick={() => handleRemove(recipe._id)}
-          >
-            Remove
-          </button>
+          <div className="recipe-row">
+            <h2 className="recipe-title">{recipe.recipeId.title}</h2>
+            <div className="cookbook-button">
+              <button
+                type="button"
+                className="list-button"
+                onClick={() => toggleGroceryList(recipe._id)}
+              >
+                {expandedGroceryList[recipe._id] ? "Hide List" : "Show List"}
+              </button>
+              <button
+                type="button"
+                className="remove-button"
+                onClick={() => handleRemove(recipe._id)}
+              >
+                Remove
+              </button>
+            </div>
+          </div>
           <div className="grocery-list">
             <ul>
               {expandedGroceryList[recipe._id]

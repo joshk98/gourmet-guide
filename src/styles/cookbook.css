@@ -1,4 +1,5 @@
 .cookbook-container {
+  margin-top: 1em;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
@@ -8,44 +9,53 @@
 
 .recipe {
   display: flex;
-  flex-direction: row;
-  justify-content: left;
-  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
   position: relative;
-  margin: 1.25em;
+  margin: 1em;
   padding-bottom: 0;
   padding: 1em;
-  height: 4em;
-  width: 60%;
+  width: 55%;
   background-color: white;
   border: 1px solid white;
   border-radius: 0.75em;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
 }
 
+.recipe-row {
+  margin: 0;
+  padding-top: 1em;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+}
+
 .recipe-title {
   color: #ff6666;
   font-weight: bold;
-  padding: 1.25em;
-  text-align: center;
-  white-space: wrap;
+  margin-left: 1.5em;
+  text-align: left;
+  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   flex-shrink: 1;
-  font-size: 1.35rem;
+  font-size: 1.5rem;
 }
 
 .grocery-list {
   max-height: fit-content;
   overflow: hidden;
+  margin-left: 1em;
+  color: #ff6666;
 }
 
 .recipe.expanded .grocery-list {
   max-height: fit-content;
-  padding-top: 1em;
 }
 
-.more-button,
+.list-button,
 .remove-button {
   padding: 0.5em 1em;
   background-color: #ff6666;
@@ -56,10 +66,10 @@
   width: 8em;
   height: 3em;
   cursor: pointer;
-  margin: .75em;
+  margin-right: 1.5em;
 }
 
-.more-button:hover,
+.list-button:hover,
 .remove-button:hover {
   background-color: #da5555;
 }
