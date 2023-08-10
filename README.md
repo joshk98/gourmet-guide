@@ -29,6 +29,8 @@ Gourmet Guide is a collaborative project by Dave, Josh and Benj for our final pr
 3. Install dependencies: `npm install`
 4. Start the development server: `npm start`
 5. Open your browser and go to: `http://localhost:3000`
+6. Open another terminal and type: `cd backend`
+7. In the backend folder, type: `node .`
 
 ### Usage
 
