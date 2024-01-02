@@ -4,6 +4,8 @@
 
 Gourmet Guide is a collaborative project by Dave, Josh and Benj for our final project in the CommandShift Bootcamp. We created the project for users to be able to create an account, discover and create recipes and also to save them in their profile.
 
+Please watch our [demonstration](https://www.youtube.com/watch?v=tevh6pvJumU) which explores the User Interface and other technologies used.
+
 ## Technologies Used
 
 ### Front End
